@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="議事録作成用Agent Skillsの公開テキスト資料を表示します。">
+  <title>公開テキスト資料｜個人的DXのススメ</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../../">機関紙編集者クラブ</a>
+    <span class="series-name">個人的DXのススメ</span>
+  </header>
+
+  <main class="container viewer-shell">
+    <nav class="breadcrumbs viewer-breadcrumbs" aria-label="パンくずリスト">
+      <a href="../../">公開資料</a><span>/</span><a href="../">個人的DXのススメ</a><span>/</span><a href="./">議事録スキル</a>
+    </nav>
+
+    <section aria-labelledby="document-title">
+      <p class="section-kicker">TEXT DOCUMENT</p>
+      <h1 id="document-title" class="viewer-title">資料を読み込んでいます</h1>
+      <div class="viewer-toolbar">
+        <a class="button primary viewer-back" href="./">← 説明ページへ戻る</a>
+        <a id="download-link" class="button secondary" href="./" download>原本をダウンロード</a>
+      </div>
+      <p id="viewer-status" class="viewer-status" role="status">UTF-8で読み込んでいます。</p>
+      <pre id="text-viewer" class="text-viewer" tabindex="0" aria-label="資料本文"></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="../../">機関紙編集者クラブ 公開資料</a></p>
+    <p>個人的DXのススメ</p>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const documents = {
+        "specification.md": "議事録作成Agent Skills群 構築仕様書",
+        "validate_ids.py": "validate_ids.py",
+        "validate_ids_README.md": "validate_ids.py 使用方法",
+        "build-prompt.md": "Gemini Sparkに入力したプロンプト"
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const file = params.get("file");
+      const title = documents[file];
+      const titleElement = document.getElementById("document-title");
+      const statusElement = document.getElementById("viewer-status");
+      const viewerElement = document.getElementById("text-viewer");
+      const downloadLink = document.getElementById("download-link");
+
+      if (!title) {
+        titleElement.textContent = "資料が見つかりません";
+        statusElement.textContent = "説明ページから資料を選び直してください。";
+        viewerElement.hidden = true;
+        downloadLink.hidden = true;
+        return;
+      }
+
+      const assetUrl = `./assets/${file}`;
+      titleElement.textContent = title;
+      document.title = `${title}｜個人的DXのススメ`;
+      downloadLink.href = assetUrl;
+      downloadLink.setAttribute("download", file);
+
+      fetch(assetUrl)
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.arrayBuffer();
+        })
+        .then((buffer) => {
+          const text = new TextDecoder("utf-8", { fatal: true }).decode(buffer);
+          viewerElement.textContent = text;
+          statusElement.textContent = `${file} ／ UTF-8で表示`;
+        })
+        .catch(() => {
+          statusElement.textContent = "資料を読み込めませんでした。原本をダウンロードして確認してください。";
+          viewerElement.hidden = true;
+        });
+    })();
+  </script>
+</body>
+</html>

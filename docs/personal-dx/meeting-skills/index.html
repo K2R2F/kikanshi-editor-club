@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="機関紙連載『個人的DXのススメ』で紹介した、議事録作成用Agent Skillsの参考資料です。">
+  <title>コンテキストから議事録スキルを作る｜個人的DXのススメ</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../../">機関紙編集者クラブ</a>
+    <span class="series-name">個人的DXのススメ</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="パンくずリスト"><a href="../../">公開資料</a><span>/</span><a href="../">個人的DXのススメ</a></nav>
+        <p class="eyebrow">MEETING MINUTES × AGENT SKILLS</p>
+        <h1>コンテキストから<br>議事録スキルを作る</h1>
+        <p class="lead">機関紙連載「個人的DXのススメ」で紹介した、議事録作成用Agent Skillsの参考資料です。仕様書、検証コード、公開用見本などをまとめてダウンロードできます。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="./assets/meeting-skills-context-v1.0.0.zip" download>一括ダウンロード <span>ZIP・約105KB</span></a>
+          <a class="text-link" href="#contents">収録内容を見る ↓</a>
+        </div>
+        <p class="download-note">v1.0.0 ／ 更新日 2026年9月1日</p>
+      </div>
+    </section>
+
+    <div class="container content-grid">
+      <aside class="section-index" aria-label="ページ内目次">
+        <p>このページの内容</p>
+        <ol>
+          <li><a href="#contents">収録資料</a></li>
+          <li><a href="#prompt">入力した指示</a></li>
+          <li><a href="#skills">5つのスキル</a></li>
+          <li><a href="#notes">利用上の注意</a></li>
+          <li><a href="#official">公式ページ</a></li>
+        </ol>
+      </aside>
+
+      <div class="article-body">
+        <section id="about" class="intro-panel" aria-labelledby="about-title">
+          <p class="section-kicker">ABOUT</p>
+          <h2 id="about-title">このページについて</h2>
+          <p>会議の録音や資料をもとに、根拠をたどれる議事録を作る仕組みを検討しました。ここでは、その仕組み自体ではなく、記事で使用した設計資料と検証用ファイルを参考資料として公開しています。</p>
+        </section>
+
+        <section id="contents" aria-labelledby="contents-title">
+          <p class="section-kicker">DOWNLOADS</p>
+          <h2 id="contents-title">収録資料</h2>
+          <div class="resource-list">
+            <a class="resource-card" href="./viewer.html?file=specification.md">
+              <span class="file-type">MD</span><span><strong>構築仕様書 Master Specification v1.0</strong><small>5つのSkills、根拠管理、ID設計などの全体仕様</small></span><span aria-hidden="true">↗</span>
+            </a>
+            <a class="resource-card" href="./viewer.html?file=validate_ids.py">
+              <span class="file-type">PY</span><span><strong>validate_ids.py</strong><small>S-ID・M-IDの採番と整合性点検を補助するコード</small></span><span aria-hidden="true">↓</span>
+            </a>
+            <a class="resource-card" href="./viewer.html?file=validate_ids_README.md">
+              <span class="file-type">MD</span><span><strong>validate_ids.py 使用方法</strong><small>実行例、点検項目、終了コードの説明</small></span><span aria-hidden="true">↗</span>
+            </a>
+            <a class="resource-card" href="./assets/public-sample-minutes.pdf">
+              <span class="file-type">PDF</span><span><strong>公開用ダミー 議事録デザイン見本</strong><small>Skill 05の情報構造と紙面デザインを確認する4ページの見本</small></span><span aria-hidden="true">↗</span>
+            </a>
+            <a class="resource-card" href="./viewer.html?file=build-prompt.md">
+              <span class="file-type">MD</span><span><strong>Gemini Sparkに入力したプロンプト</strong><small>Skills群を構築する際に使用した指示文</small></span><span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <p class="caption">この版には、5つのSkills本体は含まれていません。公開対象が確認できた資料のみを収録しています。</p>
+        </section>
+
+        <section id="prompt" aria-labelledby="prompt-title">
+          <p class="section-kicker">PROMPT</p>
+          <h2 id="prompt-title">Gemini Sparkに入力した指示</h2>
+          <blockquote class="prompt-short">添付した仕様書と参考ファイルに基づき、議事録作成用のAgent Skills群一式を構築してください。要件は省略・統合せず、完成後に自己レビューし、未実装・代替対応・プラットフォーム上の制約を明示してください。</blockquote>
+          <details class="prompt-details">
+            <summary>実際に使用した指示の全文を読む</summary>
+            <div>
+              <p>添付した「議事録作成Agent Skills群 構築仕様書 Master Specification v1.0」に基づき、議事録作成用のAgent Skills群一式を構築してください。</p>
+              <p>あわせて添付した以下のファイルも使用してください。</p>
+              <ul>
+                <li><code>validate_ids.py</code></li>
+                <li><code>validate_ids_README.md</code></li>
+                <li>現行議事録PDF（Skill 05の議事録構成・デザインのリファレンス）</li>
+              </ul>
+              <p>仕様書の要件を省略・統合せず、完成後に自己レビューを行い、未実装・代替対応・プラットフォーム上の制約がある場合は明示してください。</p>
+            </div>
+          </details>
+        </section>
+
+        <section id="skills" aria-labelledby="skills-title">
+          <p class="section-kicker">WORKFLOW</p>
+          <h2 id="skills-title">作成した5つのスキル</h2>
+          <ol class="skill-flow">
+            <li><span>01</span><div><strong>全工程の統括</strong><small>入力確認から成果物の最終検証までを管理</small></div></li>
+            <li><span>02</span><div><strong>音声の文字起こし</strong><small>音声を根拠となるTranscriptへ変換</small></div></li>
+            <li><span>03</span><div><strong>会議の場面分け</strong><small>議題や展開に沿って会議をSceneに整理</small></div></li>
+            <li><span>04</span><div><strong>議事内容の整理</strong><small>発言の意味と根拠をMeaning Unitとして構造化</small></div></li>
+            <li><span>05</span><div><strong>正式議事録の作成</strong><small>意味を変えず、読者向けの議事録へ編集</small></div></li>
+          </ol>
+          <div class="trace-line"><span>原音声</span><b>→</b><span>Transcript</span><b>→</b><span>S-ID</span><b>→</b><span>M-ID</span><b>→</b><span>議事録</span></div>
+        </section>
+
+        <section id="notes" aria-labelledby="notes-title">
+          <p class="section-kicker">IMPORTANT</p>
+          <h2 id="notes-title">利用上・検証上の注意</h2>
+          <div class="notice-stack">
+            <article class="notice"><h3>公開資料の位置づけ</h3><p>本ページは「個人的DXのススメ」の参考資料を筆者が公開するものです。利用環境に応じた調整が必要であり、そのままの動作を保証するものではありません。</p></article>
+            <article class="notice"><h3>AIによる処理結果</h3><p>AIサービスの仕様、指示内容、思考の深さ、利用環境などにより、出力や動作が異なる可能性があります。重要な内容は必ず人が確認してください。</p></article>
+            <article class="notice"><h3>筆者による検証結果</h3><p>筆者の検証では、Gemini SparkとChatGPT Workはスキルを直接インストールし、Claudeはファイルとして出力しました。Claudeが出力した一部の形式は、ブラウザ版で利用できませんでした。これは検証時の結果であり、製品共通の動作を示すものではありません。</p></article>
+            <article class="notice warning"><h3>情報管理</h3><p>機密情報や個人情報を含む資料を使用する場合は、所属組織の情報管理規則と各サービスの利用条件を確認してください。まずは機密情報を含まない資料で試してください。</p></article>
+          </div>
+        </section>
+
+        <section id="official" aria-labelledby="official-title">
+          <p class="section-kicker">OFFICIAL LINKS</p>
+          <h2 id="official-title">公式ページ</h2>
+          <ul class="official-links">
+            <li><a href="https://one.google.com/intl/ja_jp/about/google-ai-plans/">Google AI Pro <span>↗</span></a></li>
+            <li><a href="https://workspace.google.com/intl/ja/pricing.html">Google Workspace Business Standard <span>↗</span></a></li>
+            <li><a href="https://support.google.com/gemini/answer/17094196">Gemini Sparkの利用条件 <span>↗</span></a></li>
+          </ul>
+          <p class="caption">料金や提供条件は変更される場合があります。最新情報は各公式ページで確認してください。</p>
+        </section>
+
+        <section class="history" aria-labelledby="history-title">
+          <p class="section-kicker">HISTORY</p>
+          <h2 id="history-title">更新情報</h2>
+          <dl><div><dt>2026年9月1日</dt><dd>v1.0.0　初版公開用ページを作成</dd></div></dl>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="../../">機関紙編集者クラブ 公開資料</a></p>
+    <p>個人的DXのススメ</p>
+  </footer>
+</body>
+</html>
