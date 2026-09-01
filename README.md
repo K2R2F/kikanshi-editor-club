@@ -4,11 +4,11 @@
 
 ## 公開ページ
 
-- 総合入口: `docs/index.html`
-- 「個人的DXのススメ」一覧: `docs/personal-dx/index.html`
-- 「コンテキストから議事録スキルを作る」: `docs/personal-dx/meeting-skills/index.html`
+- 総合入口: <https://k2r2f.github.io/kikanshi-editor-club/>
+- 「個人的DXのススメ」一覧: <https://k2r2f.github.io/kikanshi-editor-club/personal-dx/>
+- 「コンテキストから議事録スキルを作る」: <https://k2r2f.github.io/kikanshi-editor-club/personal-dx/meeting-skills/>
 
-GitHub Pagesでは、`main`ブランチの `/docs` を公開元に設定してください。
+GitHub Pagesは、`main`ブランチの `/docs` を公開元に設定しています。
 
 ## リポジトリ構成
 
