@@ -115,6 +115,9 @@ code { padding: .12em .35em; background: var(--wash); font-family: ui-monospace,
 .notice-stack { display: grid; gap: 12px; }
 .notice { padding: 20px 22px; background: var(--wash); border-left: 4px solid var(--teal); }
 .notice p { margin: 0; }
+.notice-list { margin: 0; padding-left: 1.25rem; }
+.notice-list li + li { margin-top: .8rem; }
+.notice-list strong { color: var(--navy); }
 .notice.warning { background: var(--orange-pale); border-color: var(--orange); }
 .official-links { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
 .official-links a { display: flex; justify-content: space-between; padding: 15px 4px; color: var(--navy); border-bottom: 1px solid var(--line); font-weight: 800; text-decoration: none; }

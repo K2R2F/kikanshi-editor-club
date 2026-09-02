@@ -41,10 +41,9 @@
       </aside>
 
       <div class="article-body">
-        <section id="about" class="intro-panel" aria-labelledby="about-title">
+        <section id="about" class="intro-panel">
           <p class="section-kicker">ABOUT</p>
-          <h2 id="about-title">このページについて</h2>
-          <p>会議の録音や資料をもとに、根拠をたどれる議事録を作る仕組みを検討しました。ここでは、その仕組み自体ではなく、記事で使用した設計資料と検証用ファイルを参考資料として公開しています。</p>
+          <p>会議の録音や資料をもとに、根拠をたどれる議事録を作る仕組みを検討しました。記事で使用した設計資料と検証用ファイルを参考資料として公開しています。</p>
         </section>
 
         <section id="contents" aria-labelledby="contents-title">
@@ -108,7 +107,16 @@
           <div class="notice-stack">
             <article class="notice"><h3>公開資料の位置づけ</h3><p>本ページは「個人的DXのススメ」の参考資料を筆者が公開するものです。利用環境に応じた調整が必要であり、そのままの動作を保証するものではありません。</p></article>
             <article class="notice"><h3>AIによる処理結果</h3><p>AIサービスの仕様、指示内容、思考の深さ、利用環境などにより、出力や動作が異なる可能性があります。重要な内容は必ず人が確認してください。</p></article>
-            <article class="notice"><h3>筆者による検証結果</h3><p>筆者の検証では、Gemini SparkとChatGPT Workはスキルを直接インストールし、Claudeはファイルとして出力しました。Claudeが出力した一部の形式は、ブラウザ版で利用できませんでした。これは検証時の結果であり、製品共通の動作を示すものではありません。</p></article>
+            <article class="notice">
+              <h3>筆者による検証結果（2026年9月時点）</h3>
+              <ul class="notice-list">
+                <li><strong>Skillsの構築・インストール：</strong>Webブラウザ版でも、検証した各サービスでSkillsを構築し、インストールできました。</li>
+                <li><strong>音声文字起こし：</strong>Webブラウザ環境で、音声ファイルから直接文字起こしできたのはGemini Sparkのみでした。ChatGPT PlusとClaude（無料版）では、文字起こしを別途作成してから読み込ませる必要がありました。</li>
+                <li><strong>デスクトップアプリ：</strong>ChatGPTとClaudeにはデスクトップアプリがあります。一方、Gemini Sparkのデスクトップアプリは、検証時点ではMacのみの対応でした。ChatGPTとClaudeでWebブラウザ版の制約を受ける場合は、デスクトップアプリの利用も選択肢になります。ただし、組織の端末ではアプリをインストールできない場合があります。</li>
+                <li><strong>ファイルの出力：</strong>Webブラウザ版にコンテキストを与えたところ、<code>SKILL.md</code>を含む、スキルに必要な一式をダウンロードできる形で出力したケースもありました。</li>
+                <li><strong>結果が変わる条件：</strong>出力や動作には、コンテキストや指示内容の調整、思考の深さ、利用プラン、実行環境などが複合的に関係すると考えられます。以上は筆者の検証結果であり、各製品に共通する動作を示すものではありません。</li>
+              </ul>
+            </article>
             <article class="notice warning"><h3>情報管理</h3><p>機密情報や個人情報を含む資料を使用する場合は、所属組織の情報管理規則と各サービスの利用条件を確認してください。まずは機密情報を含まない資料で試してください。</p></article>
           </div>
         </section>
