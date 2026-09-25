@@ -23,88 +23,122 @@
         <p>この記事の内容</p>
         <ol>
           <li><a href="#knowledge">資料を増やすだけでは、実務に適したAIにならない</a></li>
+          <li><a href="#capabilities">高性能AIなら、制約は省けるのか</a></li>
           <li><a href="#rules">「してほしいこと」だけでなく「してはいけないこと」を定める</a></li>
           <li><a href="#silent-failures">「正常終了」でも、情報が欠けていることがある</a></li>
           <li><a href="#verification">「別のAIに確認させる」だけでは足りない</a></li>
           <li><a href="#workflow">AI導入は、業務フローの再設計である</a></li>
+          <li><a href="#notes">本稿を読む際の留意事項</a></li>
           <li><a href="#references">参考資料</a></li>
         </ol>
       </nav>
       <article class="column-article">
         <p>生成AIを職場で活用する際、「正確な資料を読み込ませれば、適切な答えが返ってくる」と考えがちです。しかし、実務で本当に重要なのは、AIに何を知識として与えるかだけではありません。何をしてよいのか、何をしてはいけないのか、どの根拠まで確認できれば確定してよいのか――こうした「業務上の制約」を、AIが扱える形で明示する必要があります。</p>
-    <section id="knowledge" aria-labelledby="knowledge-title">
-      <h2 id="knowledge-title">資料を増やすだけでは、実務に適したAIにならない</h2>
-      <p>2026年9月に公表された研究「Constraint-Driven Context Engineering」は、AIシステムに必要な文脈を設計する際、法令、制度、組織上の慣行、倫理、許容される出力範囲などの制約を、最初から設計要素として扱う考え方を示しました。</p>
-      <p>従来のAI活用では、関連文書を検索して回答に使わせるRAG（検索拡張生成）や、過去の履歴を記憶させる仕組みなど、「知識をどう与えるか」に関心が集まりがちでした。しかし、業務で求められるのは、情報を知っていることだけではありません。</p>
-      <p>たとえば、会議の文字起こしと配布資料をAIに渡せば、議事録らしい文章は作れます。ところが、次のような判断は、資料を渡しただけでは安定しません。</p>
-      <ul>
-        <li>発言された意見を、会議の「決定」として記載してよいか</li>
-        <li>明確な結論が出ていない論点を、「継続協議」と扱うべきか</li>
-        <li>発言者が特定できない内容を、誰かの発言として記載してよいか</li>
-        <li>配布資料にはあるが、会議では触れられなかった事項を議事録に含めてよいか</li>
-        <li>根拠となる発言を確認できない場合、どのように表示するか</li>
-      </ul>
-      <p>これらは文章力の問題ではなく、業務上の認定ルールの問題です。</p>
-    </section>
-    <section id="rules" aria-labelledby="rules-title">
-      <h2 id="rules-title">「してほしいこと」だけでなく「してはいけないこと」を定める</h2>
-      <p>AIへの指示というと、「要点を整理する」「簡潔にまとめる」といった作業内容を思い浮かべます。しかし、実務用の仕組みでは、禁止事項や確定条件も同じくらい重要です。</p>
-      <p>議事録作成を例にすれば、次のような制約が考えられます。</p>
-      <ul>
-        <li>Transcriptや資料に根拠がない事実を補わない</li>
-        <li>提案、意見、確認、合意、決定を区別し、相互に読み替えない</li>
-        <li>複数人の発言を統合して、会議全体の合意を作らない</li>
-        <li>担当者や期限が明示されていない場合は推定しない</li>
-        <li>根拠が不十分な箇所は削除せず、「要確認」として残す</li>
-        <li>決定事項には、根拠となる発言時刻や資料箇所をひも付ける</li>
-      </ul>
-      <p>こうしたルールは、AIの創造性を抑えるためのものではありません。AIの出力を、実務上確認・修正・説明できる状態に保つためのものです。</p>
-    </section>
-    <section id="silent-failures" aria-labelledby="silent-failures-title">
-      <h2 id="silent-failures-title">「正常終了」でも、情報が欠けていることがある</h2>
-      <p>同じく2026年9月に公表された「Silent Failures in Agent-Tool Interaction」は、AIが利用するツールについて、エラーが表示されないまま検索結果やデータ項目の一部が欠落する「静かな失敗」を調査しています。15の科学系ツールを調べ、手作業による確認を経て91件の失敗を確認しました。多くはAPIや、その機能をAIにつなぐ仲介部分で起きていました。</p>
-      <p>この問題は、会議記録でも無関係ではありません。システムが「処理完了」と表示していても、長時間音声の一部、添付資料の特定ページ、表の一部などを読み込めていない可能性があります。しかも、AIは取得できた範囲だけで、見た目の整った議事録を作ることができます。</p>
-      <p>したがって、完成した文章だけを確認するのでは不十分です。少なくとも、次のような処理記録を残す必要があります。</p>
-      <ul>
-        <li>対象とした音声の開始・終了時刻</li>
-        <li>文字起こしの件数や分割数</li>
-        <li>読み込んだ資料名、ページ数、版</li>
-        <li>処理できなかったファイルや箇所</li>
-        <li>各記載の根拠となった発言・資料箇所</li>
-      </ul>
-    </section>
-    <section id="verification" aria-labelledby="verification-title">
-      <h2 id="verification-title">「別のAIに確認させる」だけでは足りない</h2>
-      <p>AIの出力をAIに再確認させる方法も広がっています。ただし、単に「間違いがないか確認してください」と指示すると、正しい記述まで別の表現に置き換えたり、かえって誤りを加えたりすることがあります。</p>
-      <p>研究「TwinCheck」は、疑わしい箇所に対して根拠のある失敗仮説と代替案を作り、元の案と比較して、代替案の方が確実に優れる場合だけ修正する方法を提案しています。</p>
-      <p>議事録であれば、全文を再生成させるのではなく、たとえば「この箇所は合意ではなく継続協議ではないか」という疑義を示し、双方の根拠を比較する方が安全です。修正の単位を小さくし、変更理由を残すことが重要になります。</p>
-    </section>
-    <section id="workflow" aria-labelledby="workflow-title">
-      <h2 id="workflow-title">AI導入は、業務フローの再設計である</h2>
-      <p>職場へのAI導入は、便利な文章作成ツールを追加するだけではありません。これまで担当者の経験や暗黙の了解に委ねられていた判断を、誰でも確認できるルールとして整理する作業でもあります。</p>
-      <p>実務で再利用できるSkillを作る場合も、手順や文体だけでは足りません。少なくとも、次の内容を一体として管理する必要があります。</p>
-      <ol>
-        <li>対象業務と適用条件</li>
-        <li>使用する原資料と優先順位</li>
-        <li>認定してよい事項と禁止事項</li>
-        <li>根拠の記録方法</li>
-        <li>不確実な場合の表示と人への引き継ぎ</li>
-        <li>出力後の検証項目</li>
-        <li>ルールの版管理と変更履歴</li>
-      </ol>
-      <p>AIの性能が高まっても、職場ごとの制度や判断基準を自動的に理解してくれるわけではありません。AIに仕事を任せる第一歩は、知識を大量に与えることではなく、その職場で守るべき境界を言葉にすることです。</p>
-      <p>その作業は少し手間がかかります。しかし、そこで整理されたルールは、AIだけでなく、新任担当者への引き継ぎや業務標準化にも使える資産になります。AI活用をきっかけに、業務の根拠と判断基準を見える形にする。そこに、職場DXの大きな価値があるのではないでしょうか。</p>
-    </section>
-    <section id="references" class="references" aria-labelledby="references-title">
-      <h2 id="references-title">参考資料</h2>
-      <ul>
-        <li>Xiwei Xuほか「<a href="https://arxiv.org/abs/2609.27354">Constraint-Driven Context Engineering: Designing Domain Interfaces for AI Systems</a>」（2026年9月23日）</li>
-        <li>Shreya Gopalanほか「<a href="https://arxiv.org/abs/2609.26836">Silent Failures in Agent-Tool Interaction: An Audit of ToolUniverse</a>」（2026年9月21日）</li>
-        <li>Jiaxuan Dai・Tianyi Huang「<a href="https://arxiv.org/abs/2609.26911">TwinCheck: Evidence-Grounded Negative-Twin Verification for Stateful Tool Agents</a>」（2026年9月22日）</li>
-        <li>Varshini Elangovanほか「<a href="https://arxiv.org/abs/2609.26865">Safety Nudges: User-Facing Interventions for Real-Time AI Risk Awareness</a>」（2026年9月22日、同月24日改訂）</li>
-      </ul>
-      <p class="source-note">※各研究は2026年9月25日時点のプレプリントであり、査読前です。本稿では、研究結果そのものと、そこから導いた実務上の示唆を区別して記載しています。</p>
-    </section>
+      <section id="knowledge" aria-labelledby="knowledge-title">
+        <h2 id="knowledge-title">資料を増やすだけでは、実務に適したAIにならない</h2>
+        <p>2026年9月に公表された研究「Constraint-Driven Context Engineering」は、AIシステムに必要な文脈を設計する際、法令、制度、組織上の慣行、倫理、許容される出力範囲などの制約を、最初から設計要素として扱う考え方を示しました。</p>
+        <p>従来のAI活用では、関連文書を検索して回答に使わせるRAG（検索拡張生成）や、過去の履歴を記憶させる仕組みなど、「知識をどう与えるか」に関心が集まりがちでした。しかし、業務で求められるのは、情報を知っていることだけではありません。</p>
+        <p>たとえば、会議の文字起こしと配布資料をAIに渡せば、議事録らしい文章は作れます。ところが、次のような判断は、資料を渡しただけでは安定しません。</p>
+        <ul>
+          <li>発言された意見を、会議の「決定」として記載してよいか</li>
+          <li>明確な結論が出ていない論点を、「継続協議」と扱うべきか</li>
+          <li>発言者が特定できない内容を、誰かの発言として記載してよいか</li>
+          <li>配布資料にはあるが、会議では触れられなかった事項を議事録に含めてよいか</li>
+          <li>根拠となる発言を確認できない場合、どのように表示するか</li>
+        </ul>
+        <p>これらは文章力の問題ではなく、業務上の認定ルールの問題です。</p>
+      </section>
+      <section id="capabilities" aria-labelledby="capabilities-title">
+        <h2 id="capabilities-title">高性能AIなら、制約は省けるのか</h2>
+        <p>ここで考えておきたいのが、AIの性能がさらに高まれば、こうした制約を細かく示さなくてもよくなるのではないか、という点です。</p>
+        <p>実際、高性能AIは、一般的な業務慣行や文書構成を推定し、少ない指示から複雑な作業を進める能力を高めています。2026年6月に公表された研究「The Capability Frontier」では、21の大規模言語モデルを16の評価課題で比較し、課題に応じたモデル選択と複数回の生成を組み合わせれば、単一モデルを1回だけ使う場合より、実質的な性能を大きく引き出せることが示されました。ただし、これは結果を適切に選べる理想的な条件を含む評価であり、一つのAIが職場固有のルールを自動的に理解することを示すものではありません。</p>
+        <p>その一方、2026年1月の研究「The Hierarchy of Agentic Capabilities」では、実際の職場に近い150の業務課題を調べたところ、最上位モデルでも約4割の課題を完遂できませんでした。弱いモデルではツール操作や計画の失敗が目立つのに対し、強いモデルでは、明示されていない文脈をどう解釈するかという、より見つけにくい失敗が中心になっています。</p>
+        <p>また、2026年9月の事前登録研究「Specification Before Generation」は、金融、医療、保険分野の50のプログラム生成課題を、異なる5社系列の最先端モデルで比較しました。結果が満たすべき条件を267語の「仕様」として加えると、全モデルで欠陥が減少し、外部のセキュリティ検査で確認された中・高リスクの問題も53件から11件に減りました。</p>
+        <p>これらの結果を踏まえると、高性能AIでは、作業手順を逐一指示する必要は減る一方、結果を確定してよい条件や、誤りを許容できない境界は、なお明示する必要があると考えられます。重要なのは、AIの動きを細部まで縛ることではなく、次の三つを分けて設計することです。</p>
+        <div class="table-scroll" role="region" aria-label="高性能AIと業務仕様の役割分担" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">AIに任せやすくなったもの</th><th scope="col">職場が明示すべきもの</th><th scope="col">AIの外側で検証すべきもの</th></tr></thead>
+            <tbody><tr><td>文書構成、要約、一般的な表現、通常の業務慣行</td><td>決定・合意の定義、資料の優先順位、推定禁止事項、確認へ戻す条件</td><td>音声・資料の取得範囲、入力件数、ツールやスキーマの整合、処理記録</td></tr></tbody>
+          </table>
+        </div>
+        <p>つまり、高性能AIに必要なのは長大な操作マニュアルではありません。その職場で結果を受け入れるための、短く検証可能な「業務仕様」です。</p>
+      </section>
+      <section id="rules" aria-labelledby="rules-title">
+        <h2 id="rules-title">「してほしいこと」だけでなく「してはいけないこと」を定める</h2>
+        <p>AIへの指示というと、「要点を整理する」「簡潔にまとめる」といった作業内容を思い浮かべます。しかし、実務用の仕組みでは、禁止事項や確定条件も同じくらい重要です。</p>
+        <p>議事録作成を例にすれば、次のような制約が考えられます。</p>
+        <ul>
+          <li>Transcriptや資料に根拠がない事実を補わない</li>
+          <li>提案、意見、確認、合意、決定を区別し、相互に読み替えない</li>
+          <li>複数人の発言を統合して、会議全体の合意を作らない</li>
+          <li>担当者や期限が明示されていない場合は推定しない</li>
+          <li>根拠が不十分な箇所は削除せず、「要確認」として残す</li>
+          <li>決定事項には、根拠となる発言時刻や資料箇所をひも付ける</li>
+        </ul>
+        <p>こうしたルールは、AIの創造性を抑えるためのものではありません。AIの出力を、実務上確認・修正・説明できる状態に保つためのものです。</p>
+      </section>
+      <section id="silent-failures" aria-labelledby="silent-failures-title">
+        <h2 id="silent-failures-title">「正常終了」でも、情報が欠けていることがある</h2>
+        <p>同じく2026年9月に公表された「Silent Failures in Agent-Tool Interaction」は、AIが利用するツールについて、エラーが表示されないまま検索結果やデータ項目の一部が欠落する「静かな失敗」を調査しています。15の科学系ツールを調べ、手作業による確認を経て91件の失敗を確認しました。多くはAPIや、その機能をAIにつなぐ仲介部分で起きていました。</p>
+        <p>この問題は、会議記録でも無関係ではありません。システムが「処理完了」と表示していても、長時間音声の一部、添付資料の特定ページ、表の一部などを読み込めていない可能性があります。しかも、AIは取得できた範囲だけで、見た目の整った議事録を作ることができます。</p>
+        <p>さらに、2026年9月の研究「Closed-World Resolution Against Tool Hallucination」では、10のモデルを調べた結果、自由な形式でツールを呼び出す場合には、存在しないツールや誤った名称を使う失敗が増えること、モデルの規模を大きくしても明確には改善しないことが報告されています。入力漏れ、名称の衝突、形式違反といった問題は、AIの推論能力だけでなく、ツールを接続する仕組みの設計課題でもあります。</p>
+        <p>したがって、完成した文章だけを確認するのでは不十分です。少なくとも、次のような処理記録を残す必要があります。</p>
+        <ul>
+          <li>対象とした音声の開始・終了時刻</li>
+          <li>文字起こしの件数や分割数</li>
+          <li>読み込んだ資料名、ページ数、版</li>
+          <li>処理できなかったファイルや箇所</li>
+          <li>各記載の根拠となった発言・資料箇所</li>
+        </ul>
+      </section>
+      <section id="verification" aria-labelledby="verification-title">
+        <h2 id="verification-title">「別のAIに確認させる」だけでは足りない</h2>
+        <p>AIの出力をAIに再確認させる方法も広がっています。ただし、単に「間違いがないか確認してください」と指示すると、正しい記述まで別の表現に置き換えたり、かえって誤りを加えたりすることがあります。</p>
+        <p>研究「TwinCheck」は、疑わしい箇所に対して根拠のある失敗仮説と代替案を作り、元の案と比較して、代替案の方が確実に優れる場合だけ修正する方法を提案しています。</p>
+        <p>議事録であれば、全文を再生成させるのではなく、たとえば「この箇所は合意ではなく継続協議ではないか」という疑義を示し、双方の根拠を比較する方が安全です。修正の単位を小さくし、変更理由を残すことが重要になります。</p>
+      </section>
+      <section id="workflow" aria-labelledby="workflow-title">
+        <h2 id="workflow-title">AI導入は、業務フローの再設計である</h2>
+        <p>職場へのAI導入は、便利な文章作成ツールを追加するだけではありません。これまで担当者の経験や暗黙の了解に委ねられていた判断を、誰でも確認できるルールとして整理する作業でもあります。</p>
+        <p>実務で再利用できるSkillを作る場合も、手順や文体だけでは足りません。少なくとも、次の内容を一体として管理する必要があります。</p>
+        <ol>
+          <li>対象業務と適用条件</li>
+          <li>使用する原資料と優先順位</li>
+          <li>認定してよい事項と禁止事項</li>
+          <li>根拠の記録方法</li>
+          <li>不確実な場合の表示と人への引き継ぎ</li>
+          <li>出力後の検証項目</li>
+          <li>ルールの版管理と変更履歴</li>
+        </ol>
+        <p>高性能AIは、一般的な業務慣行や文章構成を推定し、少ない指示から適切な案を作る能力を高めています。そのため、作業手順を細部まで書き込む必要は減りつつあります。一方、職場ごとに異なる認定基準や、誤りを許容できない境界には複数の考え方があり、AIの能力だけでは一意に決められません。必要なのは、長大な操作手順ではなく、判断が分かれる点、根拠要件、禁止事項、確認へ戻す条件を、短い業務仕様として示すことです。</p>
+        <p>その作業は少し手間がかかります。しかし、そこで整理されたルールは、AIだけでなく、新任担当者への引き継ぎや業務標準化にも使える資産になります。AI活用をきっかけに、業務の根拠と判断基準を見える形にする。そこに、職場DXの大きな価値があるのではないでしょうか。</p>
+        <p>高性能AIほど、細かな手順ではなく、守るべき境界を渡す。文章の作り方は任せても、何を事実、合意、決定として認めるかは職場が定義する――この役割分担が、実務でAIを使いこなすポイントになります。</p>
+      </section>
+      <section id="notes" aria-labelledby="notes-title">
+        <h2 id="notes-title">本稿を読む際の留意事項</h2>
+        <ul>
+          <li>「高性能AI」は固定した区分ではなく、モデル、設定、利用できるツール、処理手順によって実効性能が変わります。モデル名やベンチマークの順位だけで、実務上の安全性を判断することはできません。</li>
+          <li>今回参照した高性能AIの比較研究は、業務エージェントやプログラム生成などを対象としています。会議記録に限定して、職場固有の認定基準をどこまで暗黙に推定できるかを直接検証したものではありません。本稿の議事録への適用には、複数分野の研究結果から導いた実務上の推論を含みます。</li>
+          <li>研究で示された平均的な改善は、個々の出力の正確性を保証するものではありません。決定事項、担当者、期限など、誤記の影響が大きい項目は、原発言や資料へ戻って確認する必要があります。</li>
+          <li>制約を増やせば常に良くなるわけではありません。重複や矛盾のある指示は、かえって判断を不安定にします。制約は、判断が分かれる点、禁止事項、根拠要件、要確認へ戻す条件に絞り、実際の出力で検証しながら更新する必要があります。</li>
+          <li>AIの出力品質と、入力やツール連携の完全性は別問題です。音声の欠落、資料の未取得、処理件数の不一致などは、AIによる自己確認だけに頼らず、システム側の記録や機械的な検査で確認する必要があります。</li>
+        </ul>
+      </section>
+      <section id="references" class="references" aria-labelledby="references-title">
+        <h2 id="references-title">参考資料</h2>
+        <ul>
+          <li>Xiwei Xuほか「<a href="https://arxiv.org/abs/2609.27354">Constraint-Driven Context Engineering: Designing Domain Interfaces for AI Systems</a>」（2026年9月23日）</li>
+          <li>Shreya Gopalanほか「<a href="https://arxiv.org/abs/2609.26836">Silent Failures in Agent-Tool Interaction: An Audit of ToolUniverse</a>」（2026年9月21日）</li>
+          <li>Jiaxuan Dai・Tianyi Huang「<a href="https://arxiv.org/abs/2609.26911">TwinCheck: Evidence-Grounded Negative-Twin Verification for Stateful Tool Agents</a>」（2026年9月22日）</li>
+          <li>Varshini Elangovanほか「<a href="https://arxiv.org/abs/2609.26865">Safety Nudges: User-Facing Interventions for Real-Time AI Risk Awareness</a>」（2026年9月22日、同月24日改訂）</li>
+          <li>Bradley Fowlerほか「<a href="https://arxiv.org/abs/2606.26836">The Capability Frontier: Benchmarks Miss 82% of Model Performance</a>」（2026年6月25日）</li>
+          <li>「<a href="https://arxiv.org/abs/2601.09032">The Hierarchy of Agentic Capabilities: Evaluating Frontier Models on Realistic RL Environments</a>」（2026年1月13日）</li>
+          <li>Sandeep Dhuri「<a href="https://arxiv.org/abs/2609.23270">Specification Before Generation: A Pre-Registered, Five-Model Paired Evaluation of a Specification Frame for LLM-Generated Code in Money, Time, Idempotency, and Access Tasks</a>」（2026年9月20日）</li>
+          <li>Choro Ulan uuluほか「<a href="https://arxiv.org/abs/2601.15153">How to Build AI Agents by Augmenting LLMs with Codified Human Expert Domain Knowledge? A Software Engineering Framework</a>」（2026年1月21日）</li>
+          <li>「<a href="https://arxiv.org/abs/2609.19425">Closed-World Resolution Against Tool Hallucination in LLM Agents</a>」（2026年9月16日）</li>
+        </ul>
+        <p class="source-note">※各研究は2026年9月25日時点で確認した情報に基づきます。本文中で取り上げた研究は原則としてプレプリントであり、今後、査読や改訂によって内容が変更される可能性があります。本稿では、研究結果そのものと、そこから導いた実務上の示唆を区別して記載しています。</p>
+      </section>
       </article>
     </div>
   </main>

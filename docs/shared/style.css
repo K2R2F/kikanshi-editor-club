@@ -145,6 +145,10 @@ code { padding: .12em .35em; background: var(--wash); font-family: ui-monospace,
 .column-article li + li { margin-top: .5em; }
 .column-article a { color: var(--navy); text-decoration-thickness: 1px; overflow-wrap: anywhere; }
 .column-article a:hover { color: var(--teal); }
+.table-scroll { max-width: 100%; margin: 28px 0; overflow-x: auto; }
+.column-article table { width: 100%; min-width: 600px; border-collapse: collapse; font-size: .9rem; line-height: 1.65; }
+.column-article th, .column-article td { width: 33.333%; padding: 14px 16px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+.column-article th { color: var(--navy); background: var(--teal-pale); }
 .column-article .references { padding-top: 36px; border-top: 1px solid var(--line); }
 .column-article .source-note { color: var(--muted); font-size: .88rem; }
 .column-toc { margin: 32px 0 0; padding: 22px 26px; background: var(--wash); border-left: 4px solid var(--teal); }
