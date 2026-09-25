@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AIを職場で使う際に必要な業務上の制約、根拠確認、処理記録について考えます。">
+  <title>AIには「知識」だけでなく「業務上の制約」を渡す｜DXコラム</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../../">機関紙編集者クラブ</a>
+    <span class="series-name">DXコラム</span>
+  </header>
+  <main>
+    <div class="container narrow">
+      <nav class="breadcrumbs" aria-label="パンくずリスト"><a href="../../">公開資料</a><span>/</span><a href="../">DXコラム</a><span>/</span><span aria-current="page">AIには「知識」だけでなく「業務上の制約」を渡す</span></nav>
+      <header class="column-header">
+        <p class="eyebrow">DX COLUMN</p>
+        <h1>AIには「知識」だけでなく「業務上の制約」を渡す</h1>
+      </header>
+      <nav class="column-toc" aria-label="記事の目次">
+        <p>この記事の内容</p>
+        <ol>
+          <li><a href="#knowledge">資料を増やすだけでは、実務に適したAIにならない</a></li>
+          <li><a href="#rules">「してほしいこと」だけでなく「してはいけないこと」を定める</a></li>
+          <li><a href="#silent-failures">「正常終了」でも、情報が欠けていることがある</a></li>
+          <li><a href="#verification">「別のAIに確認させる」だけでは足りない</a></li>
+          <li><a href="#workflow">AI導入は、業務フローの再設計である</a></li>
+          <li><a href="#references">参考資料</a></li>
+        </ol>
+      </nav>
+      <article class="column-article">
+        <p>生成AIを職場で活用する際、「正確な資料を読み込ませれば、適切な答えが返ってくる」と考えがちです。しかし、実務で本当に重要なのは、AIに何を知識として与えるかだけではありません。何をしてよいのか、何をしてはいけないのか、どの根拠まで確認できれば確定してよいのか――こうした「業務上の制約」を、AIが扱える形で明示する必要があります。</p>
+    <section id="knowledge" aria-labelledby="knowledge-title">
+      <h2 id="knowledge-title">資料を増やすだけでは、実務に適したAIにならない</h2>
+      <p>2026年9月に公表された研究「Constraint-Driven Context Engineering」は、AIシステムに必要な文脈を設計する際、法令、制度、組織上の慣行、倫理、許容される出力範囲などの制約を、最初から設計要素として扱う考え方を示しました。</p>
+      <p>従来のAI活用では、関連文書を検索して回答に使わせるRAG（検索拡張生成）や、過去の履歴を記憶させる仕組みなど、「知識をどう与えるか」に関心が集まりがちでした。しかし、業務で求められるのは、情報を知っていることだけではありません。</p>
+      <p>たとえば、会議の文字起こしと配布資料をAIに渡せば、議事録らしい文章は作れます。ところが、次のような判断は、資料を渡しただけでは安定しません。</p>
+      <ul>
+        <li>発言された意見を、会議の「決定」として記載してよいか</li>
+        <li>明確な結論が出ていない論点を、「継続協議」と扱うべきか</li>
+        <li>発言者が特定できない内容を、誰かの発言として記載してよいか</li>
+        <li>配布資料にはあるが、会議では触れられなかった事項を議事録に含めてよいか</li>
+        <li>根拠となる発言を確認できない場合、どのように表示するか</li>
+      </ul>
+      <p>これらは文章力の問題ではなく、業務上の認定ルールの問題です。</p>
+    </section>
+    <section id="rules" aria-labelledby="rules-title">
+      <h2 id="rules-title">「してほしいこと」だけでなく「してはいけないこと」を定める</h2>
+      <p>AIへの指示というと、「要点を整理する」「簡潔にまとめる」といった作業内容を思い浮かべます。しかし、実務用の仕組みでは、禁止事項や確定条件も同じくらい重要です。</p>
+      <p>議事録作成を例にすれば、次のような制約が考えられます。</p>
+      <ul>
+        <li>Transcriptや資料に根拠がない事実を補わない</li>
+        <li>提案、意見、確認、合意、決定を区別し、相互に読み替えない</li>
+        <li>複数人の発言を統合して、会議全体の合意を作らない</li>
+        <li>担当者や期限が明示されていない場合は推定しない</li>
+        <li>根拠が不十分な箇所は削除せず、「要確認」として残す</li>
+        <li>決定事項には、根拠となる発言時刻や資料箇所をひも付ける</li>
+      </ul>
+      <p>こうしたルールは、AIの創造性を抑えるためのものではありません。AIの出力を、実務上確認・修正・説明できる状態に保つためのものです。</p>
+    </section>
+    <section id="silent-failures" aria-labelledby="silent-failures-title">
+      <h2 id="silent-failures-title">「正常終了」でも、情報が欠けていることがある</h2>
+      <p>同じく2026年9月に公表された「Silent Failures in Agent-Tool Interaction」は、AIが利用するツールについて、エラーが表示されないまま検索結果やデータ項目の一部が欠落する「静かな失敗」を調査しています。15の科学系ツールを調べ、手作業による確認を経て91件の失敗を確認しました。多くはAPIや、その機能をAIにつなぐ仲介部分で起きていました。</p>
+      <p>この問題は、会議記録でも無関係ではありません。システムが「処理完了」と表示していても、長時間音声の一部、添付資料の特定ページ、表の一部などを読み込めていない可能性があります。しかも、AIは取得できた範囲だけで、見た目の整った議事録を作ることができます。</p>
+      <p>したがって、完成した文章だけを確認するのでは不十分です。少なくとも、次のような処理記録を残す必要があります。</p>
+      <ul>
+        <li>対象とした音声の開始・終了時刻</li>
+        <li>文字起こしの件数や分割数</li>
+        <li>読み込んだ資料名、ページ数、版</li>
+        <li>処理できなかったファイルや箇所</li>
+        <li>各記載の根拠となった発言・資料箇所</li>
+      </ul>
+    </section>
+    <section id="verification" aria-labelledby="verification-title">
+      <h2 id="verification-title">「別のAIに確認させる」だけでは足りない</h2>
+      <p>AIの出力をAIに再確認させる方法も広がっています。ただし、単に「間違いがないか確認してください」と指示すると、正しい記述まで別の表現に置き換えたり、かえって誤りを加えたりすることがあります。</p>
+      <p>研究「TwinCheck」は、疑わしい箇所に対して根拠のある失敗仮説と代替案を作り、元の案と比較して、代替案の方が確実に優れる場合だけ修正する方法を提案しています。</p>
+      <p>議事録であれば、全文を再生成させるのではなく、たとえば「この箇所は合意ではなく継続協議ではないか」という疑義を示し、双方の根拠を比較する方が安全です。修正の単位を小さくし、変更理由を残すことが重要になります。</p>
+    </section>
+    <section id="workflow" aria-labelledby="workflow-title">
+      <h2 id="workflow-title">AI導入は、業務フローの再設計である</h2>
+      <p>職場へのAI導入は、便利な文章作成ツールを追加するだけではありません。これまで担当者の経験や暗黙の了解に委ねられていた判断を、誰でも確認できるルールとして整理する作業でもあります。</p>
+      <p>実務で再利用できるSkillを作る場合も、手順や文体だけでは足りません。少なくとも、次の内容を一体として管理する必要があります。</p>
+      <ol>
+        <li>対象業務と適用条件</li>
+        <li>使用する原資料と優先順位</li>
+        <li>認定してよい事項と禁止事項</li>
+        <li>根拠の記録方法</li>
+        <li>不確実な場合の表示と人への引き継ぎ</li>
+        <li>出力後の検証項目</li>
+        <li>ルールの版管理と変更履歴</li>
+      </ol>
+      <p>AIの性能が高まっても、職場ごとの制度や判断基準を自動的に理解してくれるわけではありません。AIに仕事を任せる第一歩は、知識を大量に与えることではなく、その職場で守るべき境界を言葉にすることです。</p>
+      <p>その作業は少し手間がかかります。しかし、そこで整理されたルールは、AIだけでなく、新任担当者への引き継ぎや業務標準化にも使える資産になります。AI活用をきっかけに、業務の根拠と判断基準を見える形にする。そこに、職場DXの大きな価値があるのではないでしょうか。</p>
+    </section>
+    <section id="references" class="references" aria-labelledby="references-title">
+      <h2 id="references-title">参考資料</h2>
+      <ul>
+        <li>Xiwei Xuほか「<a href="https://arxiv.org/abs/2609.27354">Constraint-Driven Context Engineering: Designing Domain Interfaces for AI Systems</a>」（2026年9月23日）</li>
+        <li>Shreya Gopalanほか「<a href="https://arxiv.org/abs/2609.26836">Silent Failures in Agent-Tool Interaction: An Audit of ToolUniverse</a>」（2026年9月21日）</li>
+        <li>Jiaxuan Dai・Tianyi Huang「<a href="https://arxiv.org/abs/2609.26911">TwinCheck: Evidence-Grounded Negative-Twin Verification for Stateful Tool Agents</a>」（2026年9月22日）</li>
+        <li>Varshini Elangovanほか「<a href="https://arxiv.org/abs/2609.26865">Safety Nudges: User-Facing Interventions for Real-Time AI Risk Awareness</a>」（2026年9月22日、同月24日改訂）</li>
+      </ul>
+      <p class="source-note">※各研究は2026年9月25日時点のプレプリントであり、査読前です。本稿では、研究結果そのものと、そこから導いた実務上の示唆を区別して記載しています。</p>
+    </section>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer"><p><a href="../../">機関紙編集者クラブ 公開資料</a></p><p>DXコラム</p></footer>
+</body>
+</html>

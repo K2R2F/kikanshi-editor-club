@@ -7,6 +7,8 @@
 - 総合入口: <https://k2r2f.github.io/kikanshi-editor-club/>
 - 「個人的DXのススメ」一覧: <https://k2r2f.github.io/kikanshi-editor-club/personal-dx/>
 - 「コンテキストから議事録スキルを作る」: <https://k2r2f.github.io/kikanshi-editor-club/personal-dx/meeting-skills/>
+- 「DXコラム」一覧: <https://k2r2f.github.io/kikanshi-editor-club/dx-column/>
+- 「AIには『知識』だけでなく『業務上の制約』を渡す」: <https://k2r2f.github.io/kikanshi-editor-club/dx-column/ai-constraints/>
 
 GitHub Pagesは、`main`ブランチの `/docs` を公開元に設定しています。
 
