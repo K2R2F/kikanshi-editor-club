@@ -23,7 +23,7 @@
 <div class="container narrow reading">
 <p class="opening">見出しを考える、原稿の表記を整える、議事録を作る。こうした仕事のために作ったカスタムボットも、サービスの変更に合わせて見直す時期を迎えている。Gemsはスキルへ、GPTsはプラグインへ移るが、名前や指示文が引き継がれても、これまでと同じ仕事ができるとは限らない。本稿では、自分で作ったボットを引き続き使うための準備を整理する。</p>
 <nav class="toc" aria-label="このページの内容"><strong>このページの内容</strong><ol>
-<li><a href="#difference">引っ越し先はどう違うか</a></li><li><a href="#dates">終了予定と対象アカウント</a></li><li><a href="#prepare">移行前に残しておくもの</a></li><li><a href="#migrate">Gems・GPTsそれぞれの移行手順</a></li><li><a href="#edit">移行後、指示と資料をどう直すか</a></li><li><a href="#test">試運転で確かめること</a></li><li><a href="#rebuild">元の指示文から組み直す場合</a></li><li><a href="#sources">公式情報・更新履歴</a></li>
+<li><a href="#difference">引っ越し先はどう違うか</a></li><li><a href="#dates">終了予定と対象アカウント</a></li><li><a href="#prepare">移行前に残しておくもの</a></li><li><a href="#migrate">Gems・GPTsそれぞれの移行手順</a></li><li><a href="#edit">移行後、指示と資料をどう直すか</a></li><li><a href="#test">試運転で確かめること</a></li><li><a href="#rebuild">元の指示文から組み直す場合</a></li><li><a href="#sources">参考資料・更新履歴</a></li>
 </ol></nav>
 <section id="difference"><h2>引っ越し先はどう違うか</h2>
 <p>スキルは、繰り返し使う指示や作業手順をまとめたものだ。ChatGPTのプラグインは、そのスキルや参考資料、外部サービスとつなぐアプリなどをまとめる仕組みで、スキルだけのプラグインも作れる。外部連携が必須というわけではない。<a class="ref" href="#source-build">［1］</a></p>
@@ -35,14 +35,13 @@
 </section>
 <section id="dates"><h2>終了予定と対象アカウント</h2>
 <div class="table-scroll" role="region" aria-label="アカウント別の移行・終了予定" tabindex="0"><table><thead><tr><th scope="col">対象</th><th scope="col">予定</th><th scope="col">補足</th></tr></thead><tbody>
-<tr><th scope="row">Gems：個人アカウント</th><td>2026年11月</td><td>スキルへ自動移行</td></tr>
+<tr><th scope="row">Gems：個人アカウント</th><td>2026年11月17日から</td><td>スキルへ自動移行を開始</td></tr>
 <tr><th scope="row">Gems：Workspaceの企業・非営利団体等</th><td>2027年３月</td><td>Business・Enterprise・Non-Profit</td></tr>
 <tr><th scope="row">Gems：教育機関</th><td>2027年６月</td><td>Workspace Education</td></tr>
 <tr><th scope="row">GPTs：標準日程</th><td>2026年12月11日</td><td>移行・プラグインの利用条件はアカウントによる</td></tr>
 <tr><th scope="row">GPTs：延期承認を受けた一部のEnterprise</th><td>2027年２月11日</td><td>すべてのEnterpriseが対象ではない</td></tr>
 </tbody></table></div>
-<p class="source-note">出典：Google移行案内、OpenAI移行FAQ。<a href="#source-gems">［2］</a><a href="#source-faq">［3］</a></p>
-<aside class="note"><strong>紙面の「11月17日」との関係</strong><p>紙面では個人アカウントの移行開始を11月17日と記載している。一方、今回確認したGoogleの一般向け移行案内は「2026年11月」と月単位の記載であり、このページではその範囲を示した。実際に使っているアカウント内の通知で、適用日を確認してほしい。</p></aside>
+<p class="source-note">出典：Google移行案内、OpenAI移行FAQ、Geminiの画面内案内を確認したITmedia NEWS・gihyo.jpの報道。<a href="#source-gems">［2］</a><a href="#source-faq">［3］</a><a href="#source-itmedia">［6］</a><a href="#source-gihyo">［7］</a></p>
 <p>GPTsの終了対象は、利用者のプランだけでなく、そのGPTを作成したアカウントやワークスペースにも左右される。また、新規作成の停止と、既存GPTの実行停止は別の変更だ。日程は各アカウントへの案内を優先して確認する。<a class="ref" href="#source-faq">［3］</a></p>
 </section>
 <section id="prepare"><h2>移行前に残しておくもの</h2>
@@ -102,17 +101,19 @@
 <p>これまで蓄積した指示や資料、良い出力の見本は、サービスが変わっても仕事を引き継ぐ手掛かりになる。業務の自動化を進める前に、何を引き継ぎ、何を確かめるかを整理しておきたい。</p>
 <p class="related"><a href="../meeting-skills/">前回の参考資料：コンテキストから議事録スキルを作る →</a></p>
 </section>
-<section id="sources"><h2>公式情報・更新履歴</h2>
-<p>以下の公式資料を2026年10月12日に確認した。終了予定や対応機能は変更されることがある。利用時は公式案内と自分のアカウント内の通知を確認してほしい。本稿の保存項目・比較表・依頼文・工程分割は、それらを踏まえた実務上の提案である。</p>
+<section id="sources"><h2>参考資料・更新履歴</h2>
+<p>以下の公式資料と報道を2026年10月12日に確認した。終了予定や対応機能は変更されることがある。利用時は公式案内と自分のアカウント内の通知を確認してほしい。本稿の保存項目・比較表・依頼文・工程分割は、それらを踏まえた実務上の提案である。</p>
 <ol class="sources">
 <li id="source-build"><a href="https://learn.chatgpt.com/docs/build-plugins">OpenAI：Build plugins</a><small>プラグインの構成、作成・編集、更新後の試運転。</small></li>
 <li id="source-gems"><a href="https://support.google.com/gemini/answer/18560919?hl=en">Google：About the transition from Gems to skills</a><small>Gemsの終了予定、自動移行、手動移行、非対応機能。</small></li>
 <li id="source-faq"><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">OpenAI：Custom GPT retirement and migration FAQ</a><small>標準終了日と延期対象、引き継ぎ範囲、アカウント別の留意点。</small></li>
 <li id="source-migrate"><a href="https://learn.chatgpt.com/docs/migrate-custom-gpts">OpenAI：Moving your custom GPT workflows to plugins</a><small>移行操作、共有・インストール、確認事項。組織向けの説明を含む。</small></li>
 <li id="source-skills"><a href="https://support.google.com/gemini/answer/17094296?hl=en">Google：Create &amp; manage skills for Gemini Apps</a><small>スキルの編集・保存・ファイル更新、呼び出し方、利用条件。</small></li>
+<li id="source-itmedia"><a href="https://www.itmedia.co.jp/news/article/2609/29/2000001839/">ITmedia NEWS：Geminiの「Gem」廃止へ、11月17日から「スキル」へ刷新</a><small>2026年9月29日。Gem管理画面の案内を確認し、11月17日からの自動移行開始を報道。</small></li>
+<li id="source-gihyo"><a href="https://gihyo.jp/article/2026/09/gemini-skills">gihyo.jp：Google、Geminiのチャットに「Skills」を導入、個人向けから順次提供 ——Gemsは自動移行へ</a><small>2026年10月1日。Gem画面で2026年11月17日の自動移行開始の案内を確認。</small></li>
 </ol>
 <p class="source-note">資料間で記述に差がある場合は、利用者向けの最新FAQとアカウント別の通知を優先する。本稿では、終了後も必ず移行できることや、共有権限が自動で維持されることを前提にしていない。</p>
-<p class="history-line"><time datetime="2026-10-12">2026年10月12日</time>：初版公開。</p>
+<p class="history-line"><time datetime="2026-10-12">2026年10月12日</time>：初版公開。個人アカウントの移行開始日を11月17日と明記。</p>
 </section>
 <p class="back-link"><a href="../">← 個人的DXのススメ 一覧へ</a></p>
 </div></main>
