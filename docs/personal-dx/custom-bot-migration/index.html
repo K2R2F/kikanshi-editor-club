@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Gemsからスキル、GPTsからプラグインへ。終了予定、移行手順、保存する資料、移行後の編集方法と確認例を、公式情報をもとに整理します。">
+<title>カスタムボットの引っ越し準備｜個人的DXのススメ</title>
+<link rel="canonical" href="https://k2r2f.github.io/kikanshi-editor-club/personal-dx/custom-bot-migration/">
+<link rel="stylesheet" href="../../shared/style.css">
+<link rel="stylesheet" href="./page.css">
+</head>
+<body>
+<a class="skip-link" href="#article">本文へ</a>
+<header class="site-header"><a class="brand" href="../../">機関紙編集者クラブ</a><span class="series-name">個人的DXのススメ</span></header>
+<main id="article">
+<header class="migration-hero"><div class="container narrow">
+<nav class="breadcrumbs" aria-label="パンくずリスト"><a href="../../">公開資料</a><span>/</span><a href="../">個人的DXのススメ</a></nav>
+<p class="series-label">個人的DXのススメ</p><p class="title-prefix">業務自動化の、その前に</p>
+<h1>カスタムボットの<br>引っ越し準備</h1>
+<p class="lead">Gems・GPTsで蓄積した指示や資料を、次の仕組みに引き継ぐ。<br>移行前の整理から、移行後の試運転と調整まで。</p>
+<p class="updated">公開・情報確認：2026年10月12日</p>
+</div></header>
+<div class="container narrow reading">
+<p class="opening">見出しを考える、原稿の表記を整える、議事録を作る。こうした仕事のために作ったカスタムボットも、サービスの変更に合わせて見直す時期を迎えている。Gemsはスキルへ、GPTsはプラグインへ移るが、名前や指示文が引き継がれても、これまでと同じ仕事ができるとは限らない。本稿では、自分で作ったボットを引き続き使うための準備を整理する。</p>
+<nav class="toc" aria-label="このページの内容"><strong>このページの内容</strong><ol>
+<li><a href="#difference">引っ越し先はどう違うか</a></li><li><a href="#dates">終了予定と対象アカウント</a></li><li><a href="#prepare">移行前に残しておくもの</a></li><li><a href="#migrate">Gems・GPTsそれぞれの移行手順</a></li><li><a href="#edit">移行後、指示と資料をどう直すか</a></li><li><a href="#test">試運転で確かめること</a></li><li><a href="#rebuild">元の指示文から組み直す場合</a></li><li><a href="#sources">公式情報・更新履歴</a></li>
+</ol></nav>
+<section id="difference"><h2>引っ越し先はどう違うか</h2>
+<p>スキルは、繰り返し使う指示や作業手順をまとめたものだ。ChatGPTのプラグインは、そのスキルや参考資料、外部サービスとつなぐアプリなどをまとめる仕組みで、スキルだけのプラグインも作れる。外部連携が必須というわけではない。<a class="ref" href="#source-build">［1］</a></p>
+<div class="routes" aria-label="GemsとGPTsの移行先の比較">
+<div class="route"><h3>Gemini</h3><p class="route-from">Gems</p><p class="route-arrow">↓ <span>自動移行</span></p><div class="package"><strong>スキル</strong><p>指示文・対応する添付ファイル</p></div><p class="route-note">Canvas・Deep Researchなどは、現時点でスキルに非対応。</p></div>
+<div class="route"><h3>ChatGPT</h3><p class="route-from">GPTs</p><p class="route-arrow">↓ <span>作成者などが移行操作</span></p><div class="package"><strong>プラグイン</strong><div class="inner">スキル・参考資料</div><div class="inner">接続済みアプリ</div></div><p class="route-note">独自の外部接続設定（Custom Actions）は別途再構築。</p></div>
+</div><p class="source-note">移行内容と制限：Googleの移行案内、OpenAIの移行FAQ・ガイド。<a href="#source-gems">［2］</a><a href="#source-faq">［3］</a><a href="#source-migrate">［4］</a></p>
+<p>必要なスキルを会話の中で呼び出す使い方になるため、「そのボットを開けば、いつも同じ指示が働く」という従来の感覚とは違いがある。自動で選ばれるかだけに頼らず、試運転では使うスキルやプラグインを明示して確認したい。</p>
+</section>
+<section id="dates"><h2>終了予定と対象アカウント</h2>
+<div class="table-scroll" role="region" aria-label="アカウント別の移行・終了予定" tabindex="0"><table><thead><tr><th scope="col">対象</th><th scope="col">予定</th><th scope="col">補足</th></tr></thead><tbody>
+<tr><th scope="row">Gems：個人アカウント</th><td>2026年11月</td><td>スキルへ自動移行</td></tr>
+<tr><th scope="row">Gems：Workspaceの企業・非営利団体等</th><td>2027年３月</td><td>Business・Enterprise・Non-Profit</td></tr>
+<tr><th scope="row">Gems：教育機関</th><td>2027年６月</td><td>Workspace Education</td></tr>
+<tr><th scope="row">GPTs：標準日程</th><td>2026年12月11日</td><td>移行・プラグインの利用条件はアカウントによる</td></tr>
+<tr><th scope="row">GPTs：延期承認を受けた一部のEnterprise</th><td>2027年２月11日</td><td>すべてのEnterpriseが対象ではない</td></tr>
+</tbody></table></div>
+<p class="source-note">出典：Google移行案内、OpenAI移行FAQ。<a href="#source-gems">［2］</a><a href="#source-faq">［3］</a></p>
+<aside class="note"><strong>紙面の「11月17日」との関係</strong><p>紙面では個人アカウントの移行開始を11月17日と記載している。一方、今回確認したGoogleの一般向け移行案内は「2026年11月」と月単位の記載であり、このページではその範囲を示した。実際に使っているアカウント内の通知で、適用日を確認してほしい。</p></aside>
+<p>GPTsの終了対象は、利用者のプランだけでなく、そのGPTを作成したアカウントやワークスペースにも左右される。また、新規作成の停止と、既存GPTの実行停止は別の変更だ。日程は各アカウントへの案内を優先して確認する。<a class="ref" href="#source-faq">［3］</a></p>
+</section>
+<section id="prepare"><h2>移行前に残しておくもの</h2>
+<p>まず、今後も使うボットを選ぶ。次に、指示文だけでなく「何を渡せば、どのような結果が出ていたか」を残す。次の表は、機関紙の編集や議事録作成を想定した整理例だ。</p>
+<div class="table-scroll" role="region" aria-label="移行前の保存項目" tabindex="0"><table><thead><tr><th scope="col">残すもの</th><th scope="col">具体例・使い道</th></tr></thead><tbody>
+<tr><th scope="row">名前・用途・指示文</th><td>「記事の表記統一」「会議記録の整理」など。設定画面の指示文を保存する。</td></tr>
+<tr><th scope="row">参考資料の原本と版</th><td>用字用語集、執筆手引き、議事録見本。どの版を使ったかも記録する。</td></tr>
+<tr><th scope="row">普段の依頼文・入力資料</th><td>同じ条件で移行前後を比べるための原稿や会議メモ。</td></tr>
+<tr><th scope="row">うまくできた出力例</th><td>見出し、項目、順番、文字数など、何を保ちたいかを書き添える。</td></tr>
+<tr><th scope="row">必要な機能と共有先</th><td>Canvasの使用、ファイル作成、外部サービスへの接続、共同利用者。</td></tr>
+</tbody></table></div>
+<p>資料と指示文の原本は、職場で管理できる保存先にも置いておく。個人情報などを含む実例を使う場合は、所属組織の利用ルールに沿って扱う。</p>
+</section>
+<section id="migrate"><h2>Gems・GPTsそれぞれの移行手順</h2>
+<h3>Gems：自動移行を待つか、先に作り直す</h3>
+<p>Googleは、Gemsと対応する添付ファイルを自動でスキルへ移すと案内している。先に試したい場合は、元のGemの名前・説明・指示文を、設定の「スキル」から手動で作成したスキルに移せる。<a class="ref" href="#source-gems">［2］</a></p>
+<ol class="steps"><li>元のGemから指示文と知識ファイルを保存する。</li><li>「設定」→「スキル」→「手動で作成」で、名前・説明・指示文を登録する。</li><li>ファイルも含める場合は、作成したスキルをダウンロードし、取り出した<code>SKILL.md</code>と参考資料を、スキル名と同じ名前のフォルダーにまとめる。</li><li>「スキルを置き換える」から、そのフォルダーをアップロードする。</li></ol>
+<p>手動で組み直しても、非対応の機能が使えるようになるわけではない。Canvas、Deep Research、動画・音楽生成、ガイド付き学習などは、現時点でスキルに対応していない。GitHubファイルも非対応とされている。元の仕事に必要な機能かどうかを確かめ、必要なら別の工程に分けて試す。共有やDrive等からの資料追加も、利用できる状態か確認したい。<a class="ref" href="#source-gems">［2］</a></p>
+<h3>GPTs：移行操作を行い、プラグインを試す</h3>
+<ol class="steps"><li>必要な下書き・変更を保存し、移行対象となる最新の公開済み版へ反映する。ここでいう公開は、不特定多数への共有を意味しない。</li><li>「My GPTs」で対象を選び、「Migrate to plugin」から移行する。</li><li>指示文・参考資料・接続済みアプリを確認し、プラグインをインストールして試す。</li><li>共同利用する場合は、移行後の共有設定と、利用者側のアクセス・インストールを確かめる。</li></ol>
+<p>移行後のプラグインは非公開で作られる。元の共有設定や指定モデル、未公開の編集内容はそのまま引き継がれない。元のGPTは移行後に読み取り専用になるため、その後の変更はプラグイン側で行う。<a class="ref" href="#source-migrate">［4］</a></p>
+<p>Custom Actionsによる独自の外部接続は移行されない。既存アプリで代替できるかを調べ、必要ならMCPによる接続を別途構築する。MCPはAIと外部の道具・情報をつなぐ仕組みであり、導入するだけで従来の動作が再現されるわけではない。<a class="ref" href="#source-faq">［3］</a></p>
+</section>
+<section id="edit"><h2>移行後、指示と資料をどう直すか</h2>
+<p>その場で出力を直しても、次の会話で同じ直しが反映されるとは限らない。繰り返し使うルールを変えたいときは、<strong>保存済みのスキル・プラグインの指示を更新する</strong>ことを明示する。</p>
+<div class="edit-grid"><div><h3>ChatGPT</h3><p>「Plugins」から対象を開き、「Edit Plugin」を選ぶ。開いた編集用の会話で変更を依頼し、指示と資料を確認して更新を完了する。編集権限やPlugin Creatorの利用可否によって表示は異なる。<a class="ref" href="#source-build">［1］</a></p></div><div><h3>Gemini</h3><p>「設定」→「スキル」で対象を開く。説明・指示を直接編集するか、「その他」→「Geminiで編集」を選び、変更後に保存する。手動で参考ファイルを更新する際は、ファイルを含むスキル全体の再アップロードが必要になる。<a class="ref" href="#source-skills">［5］</a></p></div></div>
+<p>依頼には、実際の出力、期待する見本、変更点、維持する点を添える。以下は議事録用に作った依頼例で、対象名などを置き換えて使える。</p>
+<div class="prompt"><div class="prompt-bar"><strong>指示を修正する依頼例</strong><button type="button" data-copy="edit-prompt">コピー</button></div><pre id="edit-prompt">「〇〇」の保存済みの指示を更新してください。
+添付の出力では、提案が決定事項に入っています。
+見本を参考に、決定事項・継続協議・対応事項を分けてください。
+資料に根拠がない担当者や期限は補わず、「要確認」としてください。
+見出しの順番と文体は維持してください。
+変更した指示と、同じ入力による出力例を示してください。</pre></div>
+<p>資料を差し替える場合は、旧版を特定する。新しい資料を追加するだけでは、新旧両方が参照候補になることがある。</p>
+<div class="prompt"><div class="prompt-bar"><strong>参考資料を差し替える依頼例</strong><button type="button" data-copy="file-prompt">コピー</button></div><pre id="file-prompt">「〇〇」の参考資料「用字用語集・旧版」を、添付の改訂版に置き換えてください。
+今後は改訂版を参照するよう、保存済みの指示も確認してください。
+他の参考資料と出力形式は維持し、変更箇所を示してください。</pre></div>
+<p class="source-note">上の依頼文は、本ページで作成した実務用の例。更新手順は各社の公式案内を参照。画面の名称や提供範囲は変更されることがある。</p>
+<p>Geminiでは、通常チャットで使うスキルと、Sparkのタスク・スケジュールの利用条件を分けて考える。公式案内では、通常チャットのスキルはGoogle AIの有料契約なしでも利用できるとされている。<a class="ref" href="#source-skills">［5］</a></p>
+</section>
+<section id="test"><h2>試運転で確かめること</h2>
+<p>更新を終えたら、新しい会話で、保存しておいた依頼文と同じ資料を渡す。ChatGPTでは<code>@</code>、Geminiでは<code>/</code>または更新後の<code>@</code>から対象を選択できる。自動選択も使う場合は、対象名を指定しない依頼でも確認する。<a class="ref" href="#source-migrate">［4］</a><a class="ref" href="#source-skills">［5］</a></p>
+<p>機関紙・議事録の仕事なら、次の観点で比較すると違いを見つけやすい。</p>
+<div class="table-scroll" role="region" aria-label="移行後の試運転の観点" tabindex="0"><table><thead><tr><th scope="col">観点</th><th scope="col">確かめること</th></tr></thead><tbody>
+<tr><th scope="row">形式</th><td>必要な見出し・項目・順番・文字数が保たれているか。</td></tr>
+<tr><th scope="row">内容</th><td>重要な発言や要点が欠けていないか。提案が決定に変わっていないか。</td></tr>
+<tr><th scope="row">根拠</th><td>指定した資料の版を使っているか。資料にない内容を補っていないか。</td></tr>
+<tr><th scope="row">機能</th><td>必要なファイルを開き、所定の成果物を作れるか。外部接続も動くか。</td></tr>
+<tr><th scope="row">不明点</th><td>担当者や期限が不明な例でも、勝手に埋めず、確認事項として残せるか。</td></tr>
+</tbody></table></div>
+<p>一度うまくできたことだけで判断せず、普段の例に加え、情報が足りない例も試したい。調整した箇所と、引き続き保ちたい箇所の両方を確かめる。</p>
+</section>
+<section id="rebuild"><h2>元の指示文から組み直す場合</h2>
+<p>移行した指示がうまく働かないときは、元のカスタムプロンプトと見本をもとに、新しいスキルとして作り直す方法もある。まず「使う場面」「渡す資料」「作業手順」「出力形式」「不明な場合の扱い」を整理して、AIと相談する。</p>
+<p>例えば、議事録作成なら「文字起こしを整理する」「議事内容を分類する」「正式な議事録に整える」と工程を分けると、不具合が出た部分を調整しやすい。ただし、短い要約だけなら一つのスキルで足りることもある。分割そのものを目的にせず、修正・確認のしやすさで考えたい。</p>
+<p>指示で直せる問題と、必要な機能がない問題は分けて扱う。非対応の機能、読み込めない形式、接続権限の不足は、指示を書き足すだけでは解決しない。別の道具で処理して結果を渡すなど、工程全体を見直して試す必要がある。</p>
+<p>これまで蓄積した指示や資料、良い出力の見本は、サービスが変わっても仕事を引き継ぐ手掛かりになる。業務の自動化を進める前に、何を引き継ぎ、何を確かめるかを整理しておきたい。</p>
+<p class="related"><a href="../meeting-skills/">前回の参考資料：コンテキストから議事録スキルを作る →</a></p>
+</section>
+<section id="sources"><h2>公式情報・更新履歴</h2>
+<p>以下の公式資料を2026年10月12日に確認した。終了予定や対応機能は変更されることがある。利用時は公式案内と自分のアカウント内の通知を確認してほしい。本稿の保存項目・比較表・依頼文・工程分割は、それらを踏まえた実務上の提案である。</p>
+<ol class="sources">
+<li id="source-build"><a href="https://learn.chatgpt.com/docs/build-plugins">OpenAI：Build plugins</a><small>プラグインの構成、作成・編集、更新後の試運転。</small></li>
+<li id="source-gems"><a href="https://support.google.com/gemini/answer/18560919?hl=en">Google：About the transition from Gems to skills</a><small>Gemsの終了予定、自動移行、手動移行、非対応機能。</small></li>
+<li id="source-faq"><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq">OpenAI：Custom GPT retirement and migration FAQ</a><small>標準終了日と延期対象、引き継ぎ範囲、アカウント別の留意点。</small></li>
+<li id="source-migrate"><a href="https://learn.chatgpt.com/docs/migrate-custom-gpts">OpenAI：Moving your custom GPT workflows to plugins</a><small>移行操作、共有・インストール、確認事項。組織向けの説明を含む。</small></li>
+<li id="source-skills"><a href="https://support.google.com/gemini/answer/17094296?hl=en">Google：Create &amp; manage skills for Gemini Apps</a><small>スキルの編集・保存・ファイル更新、呼び出し方、利用条件。</small></li>
+</ol>
+<p class="source-note">資料間で記述に差がある場合は、利用者向けの最新FAQとアカウント別の通知を優先する。本稿では、終了後も必ず移行できることや、共有権限が自動で維持されることを前提にしていない。</p>
+<p class="history-line"><time datetime="2026-10-12">2026年10月12日</time>：初版公開。</p>
+</section>
+<p class="back-link"><a href="../">← 個人的DXのススメ 一覧へ</a></p>
+</div></main>
+<footer class="site-footer"><p>機関紙編集者クラブ｜個人的DXのススメ</p></footer>
+<p id="copy-status" class="sr-only" role="status" aria-live="polite"></p>
+<script src="./page.js"></script>
+</body></html>
