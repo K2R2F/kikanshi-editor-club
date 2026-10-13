@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AIの完成物だけでなく、入力・処理過程・検証方法を点検し、「静かな失敗」を見つける方法を考えます。">
+  <title>AIの「静かな失敗」を見逃さない｜DXコラム</title>
+  <link rel="stylesheet" href="../../shared/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../../">機関紙編集者クラブ</a>
+    <span class="series-name">DXコラム</span>
+  </header>
+  <main>
+    <div class="container narrow">
+      <nav class="breadcrumbs" aria-label="パンくずリスト"><a href="../../">公開資料</a><span>/</span><a href="../">DXコラム</a><span>/</span><span aria-current="page">AIの「静かな失敗」を見逃さない</span></nav>
+      <header class="column-header">
+        <p class="eyebrow">DX COLUMN</p>
+        <h1>AIの「静かな失敗」を見逃さない</h1>
+      </header>
+      <nav class="column-toc" aria-label="記事の目次">
+        <p>この記事の内容</p>
+        <ol>
+          <li><a href="#process">正しい答えでも、正しい仕事をしたとは限らない</a></li>
+          <li><a href="#minutes">議事録なら、何を点検するのか</a></li>
+          <li><a href="#judge">検証AIも、検証されなければならない</a></li>
+          <li><a href="#logs">ログは、事故調査のためだけに残すものではない</a></li>
+          <li><a href="#source-repair">根拠が足りなければ、推定ではなく「取り直す」</a></li>
+          <li><a href="#checklist">小さく始めるための五つの確認項目</a></li>
+          <li><a href="#notes">本稿を読む際の留意事項</a></li>
+          <li><a href="#references">参考資料</a></li>
+        </ol>
+      </nav>
+      <article class="column-article">
+        <p>AIの失敗は、いつもエラー表示とともに現れるわけではありません。むしろ実務で厄介なのは、処理が「正常に完了」し、読みやすい文書もできているのに、その途中で音声の一部や添付資料、必要な確認手順が抜け落ちている場合です。</p>
+        <p><a href="../ai-constraints/">前回</a>は、AIに資料を与えるだけでなく、「何を決定と認定するか」「何を推定してはいけないか」といった業務上の制約を明示する必要性を取り上げました。今回は、その制約が実際に守られたかをどう確かめるかを考えます。</p>
+        <p>結論から言えば、完成した文章だけを見るのでは足りません。入力、処理過程、出力の三つを分けて点検し、根拠へ戻れる記録を残す必要があります。</p>
+        <section id="process" aria-labelledby="process-title">
+        <h2 id="process-title">正しい答えでも、正しい仕事をしたとは限らない</h2>
+        <p>2026年10月に公表された「Continuous Process-Level Evaluation for Evolving Enterprise AI Agent Skills」は、企業向けAIエージェントの評価で、最終的な数値が正しいかだけでなく、使用したツール、引数、実行順序、データベースの状態まで検査しました。</p>
+        <p>240回の試行のうち、最終的な数値検査をすべて通過した175回を調べると、162回、率にして92.6％で、別の評価項目による逸脱が見つかりました。すべてが重大事故という意味ではありません。しかし、「答えが合っている」という一点だけでは、処理が正しかったとは判断できないことを示しています。</p>
+        <p>たまたま正しい結論に着いた処理は、入力条件が変わった次回も同じように成功するとは限りません。再利用可能なSkillとして業務に組み込むなら、結果だけでなく、仕事の通り道も評価対象にする必要があります。</p>
+        </section>
+        <section id="minutes" aria-labelledby="minutes-title">
+        <h2 id="minutes-title">議事録なら、何を点検するのか</h2>
+        <p>AIによる議事録作成を例にすると、点検対象は次の三層に分けられます。</p>
+        <div class="table-scroll" role="region" aria-label="議事録作成で点検する三つの層" tabindex="0">
+        <table>
+        <thead>
+        <tr class="header">
+        <th>層</th>
+        <th>確認すること</th>
+        <th>記録の例</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd">
+        <td>入力</td>
+        <td>必要な原資料を最後まで取得できたか</td>
+        <td>音声の長さ、文字起こしの分割数、資料名・ページ数・版</td>
+        </tr>
+        <tr class="even">
+        <td>処理過程</td>
+        <td>決めた手順と認定ルールを通ったか</td>
+        <td>使用した処理、未処理箇所、決定・合意・提案の分類結果</td>
+        </tr>
+        <tr class="odd">
+        <td>出力</td>
+        <td>記載内容が根拠と一致しているか</td>
+        <td>発言時刻、資料箇所、要確認表示、承認者</td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        <p>大切なのは、「議事録が自然に読めるか」だけを最初の合格条件にしないことです。音声が60分あるのに文字起こしが47分で終わっていないか。10ページの資料のうち9ページしか取得できていないのに、処理済みと表示されていないか。決定事項に分類した文が、実際には一人の提案にすぎないのではないか。こうした機械的・構造的な確認を先に行います。</p>
+        <p>文章の巧拙を評価する前に、材料と工程がそろっているかを確かめる。この順番が重要です。</p>
+        </section>
+        <section id="judge" aria-labelledby="judge-title">
+        <h2 id="judge-title">検証AIも、検証されなければならない</h2>
+        <p>では、別のAIにチェックさせれば十分でしょうか。</p>
+        <p>「AGO AI Quality Gate」は、検索した根拠を使って回答するRAGシステムについて、公開前の品質判定を研究したものです。注目すべき点は、検証に使うAIを無条件には信用せず、その判定能力自体を事前に測っていることです。</p>
+        <p>同じ条件で評価したところ、低コストの検証モデルは、根拠に従っていない回答の識別が偶然より少し良い程度でした。より高性能なモデルでも、対象分野によって成績に幅がありました。しかも、形式上は問題なく判定結果を返していました。</p>
+        <p>つまり、検証AIにも「静かな失敗」があります。そこで同研究は、欠測や検証エラーを明示的な状態として扱い、機械的な検査、個別の安全ルール、構造化したAI評価を重ねています。</p>
+        <p>職場でも、検証を一つのAIに丸投げするより、次の順番が現実的です。</p>
+        <ol type="1">
+        <li>件数、時間、ページ数、必須項目などを機械的に照合する</li>
+        <li>根拠との対応や分類など、意味の確認をAIに補助させる</li>
+        <li>重要な決定、担当者、期限は人が原資料へ戻って承認する</li>
+        <li>判断できない場合を「不合格」や「合格」に押し込まず、「要確認」として止める</li>
+        </ol>
+        <p>AIを二重化するだけではなく、異なる種類の検査を重ねることがポイントです。</p>
+        </section>
+        <section id="logs" aria-labelledby="logs-title">
+        <h2 id="logs-title">ログは、事故調査のためだけに残すものではない</h2>
+        <p>長い処理過程を記録しても、人が読めなければ役に立ちません。「Transect」は、長時間動くAIエージェントの行動、使用トークン、別エージェントの活動、評価ラベルを、共通の時系列上で確認できるようにする仕組みです。約1,300万トークン規模の評価事例でも、注目すべき行動から元のやり取りへ戻れるようにしています。</p>
+        <p>職場のAI活用で、ここまで大規模な仕組みが必要とは限りません。ただし、考え方は応用できます。たとえば議事録本文には細かな処理記録を表示せず、確認する人だけが各記載から原発言や資料箇所へ戻れるようにする。エラーが起きた工程だけを再実行できるようにする。ログを「後で責任を問うための記録」ではなく、「確認し、直し、再開するための道筋」として設計するのです。</p>
+        </section>
+        <section id="source-repair" aria-labelledby="source-repair-title">
+        <h2 id="source-repair-title">根拠が足りなければ、推定ではなく「取り直す」</h2>
+        <p>今週のもう一つの示唆は、根拠不足を文章生成で埋めないことです。「From Papers to Mechanisms」は、科学文献を根拠箇所と結び付いた単位で整理し、証拠が不足する場合には、手元の資料だけで回答を作るのではなく、リンク先の原論文から必要な情報を取り直す「source repair」を提案しています。</p>
+        <p>これを会議記録に置き換えると、「担当者が分からないから文脈から推定する」のではなく、元の音声、配布資料、発言者情報へ戻るということです。それでも確認できなければ、未確定のまま残します。</p>
+        <p>高性能なAIほど、欠けた情報を自然に補ってしまいます。だからこそ、分からないときに何を推定するかではなく、どの原資料へ戻るか、どの状態で人に引き継ぐかを、あらかじめ決めておく必要があります。</p>
+        </section>
+        <section id="checklist" aria-labelledby="checklist-title">
+        <h2 id="checklist-title">小さく始めるための五つの確認項目</h2>
+        <p>新しいシステムを導入しなくても、まずは次の五つを処理記録に加えられます。</p>
+        <ul>
+        <li>使用した原資料の一覧と取得範囲</li>
+        <li>処理できなかったファイル、区間、ページ</li>
+        <li>決定事項・対応事項と根拠箇所の対応</li>
+        <li>必須工程を通過したことが分かるチェック結果</li>
+        <li>「確認済み」「要修正」「判断不能」「人の確認待ち」の状態</li>
+        </ul>
+        <p>AIの出力は、完成品だけを見ると実力以上に確かに見えます。信頼できる業務フローに必要なのは、AIが「できました」と報告することではなく、何を読み、どの手順を通り、どの根拠からその記載を作ったのかを確認できることです。</p>
+        <p>「静かな失敗」を完全になくすことは難しくても、見つけられる形にはできます。完成した文章の品質管理から、仕事の通り道を含む品質管理へ。この転換が、AIを試用段階から実務の基盤へ進める条件になるのではないでしょうか。</p>
+        </section>
+        <section id="notes" aria-labelledby="notes-title">
+        <h2 id="notes-title">本稿を読む際の留意事項</h2>
+        <ul>
+        <li>本稿で紹介した研究は、企業向けAIエージェント、RAG、科学文献処理などを対象としており、自治体や労働組合の議事録作成を直接評価したものではありません。議事録への適用は、研究結果から導いた実務上の提案です。</li>
+        <li>92.6％という数値は、特定の二つのSkill、二つの仕様、二つの実行基盤、三つのモデルによる240試行の結果です。一般のAI業務すべてで同じ割合の逸脱が起きることを意味しません。</li>
+        <li>処理過程の記録を増やすと、確認コストに加えて、会議音声、発言者、資料などの機微情報を保持するリスクも増えます。保存範囲、閲覧権限、保存期間、削除方法を同時に定める必要があります。</li>
+        <li>ログが残っていることと、内容が完全であることは別です。記録の仕組み自体が欠落・誤記する可能性を考慮し、重要項目は原資料との抜き取り確認が必要です。</li>
+        <li>AIによる検証は補助として有効ですが、判定性能はモデルや対象分野によって変わります。実際の業務データで検証能力を測り、誤りの影響が大きい項目は人の承認を残す必要があります。</li>
+        <li>本稿で参照した2026年の研究は、原則としてプレプリントです。今後の査読や改訂により、数値や結論が変わる可能性があります。</li>
+        </ul>
+        </section>
+        <section id="references" class="references" aria-labelledby="references-title">
+        <h2 id="references-title">参考資料</h2>
+        <ul>
+        <li>Ngoc Phuoc An Vo、Aarya Doshi、Vadim Sheinin「<a href="https://arxiv.org/abs/2610.01833">Continuous Process-Level Evaluation for Evolving Enterprise AI Agent Skills</a>」（2026年10月1日）</li>
+        <li>Giulio Zeloniほか「<a href="https://arxiv.org/abs/2610.01218">AGO AI Quality Gate: Evidence-First Release Decisions for Retrieval-Augmented Generation</a>」（2026年10月1日）</li>
+        <li>Toby D. Pilditchほか「<a href="https://arxiv.org/abs/2610.08364">Transect: Retaining Observability for Long-Horizon LLM Agent Evaluations</a>」（2026年10月6日）</li>
+        <li>Qiuhui Chenほか「<a href="https://arxiv.org/abs/2610.06248">From Papers to Mechanisms: An Evidence-Grounded Knowledge Substrate for Scientific Language Models</a>」（2026年10月5日）</li>
+        <li>Shreya Gopalanほか「<a href="https://arxiv.org/abs/2609.26836">Silent Failures in Agent-Tool Interaction: An Audit of ToolUniverse</a>」（2026年9月21日）</li>
+        </ul>
+        <p class="source-note">※2026年10月13日時点で確認した情報に基づきます。</p>
+        </section>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer"><p><a href="../../">機関紙編集者クラブ 公開資料</a></p><p>DXコラム</p></footer>
+</body>
+</html>
