@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Skill、検証コード、軽量モデルを組み合わせた業務設計について、今後の検証に向けて考える着想です。">
+  <title>全部をエージェントにしなくてもいい｜着想</title>
+  <link rel="stylesheet" href="../../../shared/style.css">
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="../../../">機関紙編集者クラブ</a><span class="series-name">DXコラム</span></header>
+  <main><div class="container narrow">
+    <nav class="breadcrumbs" aria-label="パンくずリスト"><a href="../../../">公開資料</a><span>/</span><a href="../../">DXコラム</a><span>/</span><span>着想</span><span>/</span><span aria-current="page">全部をエージェントにしなくてもいい</span></nav>
+    <header class="column-header"><p class="eyebrow">着想</p><h1>全部をエージェントにしなくてもいい</h1><p class="caption">この文章は、今後の検証にむけた着想です。記載した構成の有効性を、実際の業務データで確認したものではありません。</p></header>
+    <nav class="column-toc" aria-label="この着想の内容"><p>この着想の内容</p><ol><li><a href="#try-next">次に試したいこと</a></li><li><a href="#notes">留意事項</a></li><li><a href="#references">参考資料</a></li></ol></nav>
+    <article class="column-article">
+      <p>クラウドで提供されるAIについて、「以前より期待した答えが返ってこない」と感じることがある。その体感だけで、AI全体の能力が低下したとは判断できない。同じ名称のサービスでも、更新や利用条件によって応答の傾向が変わる場合がある。</p>
+      <p>一方、費用や利用量を抑えるため、あえて軽いモデルを使いたい場面もある。</p>
+      <p>自ら手順を選び、ツールを使って仕事を進めるAIエージェントへの関心が高まるなか、従来のプロンプトによる仕事の教え方は、もう古いのだろうか。</p>
+      <p>必ずしもそうではない。定型的な仕事や繰り返し行う仕事なら、別の設計も考えられる。対象業務を絞り、手順や判断基準を再利用できる形にまとめたSkillに、禁止事項や正解例も記録する。ファイルの確認や件数の照合、処理順序、出力形式の検査はコードに任せる。そのうえで、軽量モデルには抽出、限定された分類、定型的な文章化などを担当させる。</p>
+      <p>判断が難しい案件や検査で問題が見つかった案件は、高性能モデルや人へ引き継ぐ。</p>
+      <p>すべての仕事を、一つの賢いAIに任せる必要はない。仕事を小さく分け、間違えてはいけない部分をコードで固めれば、軽いAIでも安定して働ける可能性がある。</p>
+      <p>これは、旧来のプロンプトへ戻るという話ではない。プロンプトをSkillとして再利用できる形にし、コードによる検査と、仕事に応じたモデル選択を組み合わせる。エージェント化が進むからこそ、こうした堅実な業務設計を、もう一度考えてみる価値がありそうだ。</p>
+      <section id="try-next" aria-labelledby="try-next-title"><h2 id="try-next-title">次に試したいこと</h2>
+      <p>検証の出発点として、同じ業務と原資料を用意し、次の三つを比較したい。</p>
+      <ol><li>高性能モデルに、簡単な指示だけを渡す</li><li>軽量モデルに、詳細なSkillを渡す</li><li>軽量モデルに、Skillと検証コードを組み合わせる</li></ol>
+      <p>比較するのは、完成文の読みやすさだけではない。事実の正確性、根拠の欠落、同じ入力に対する再現性、使用トークン、人が修正する時間、そして「静かな失敗」をどこまで発見できるかである。</p>
+      <p>まずはこの三つを比べ、必要に応じて高性能モデルにも同じSkillと検証コードを渡して、モデルの違いと設計の違いを分けて確かめたい。</p>
+      <p>高性能モデルと軽量モデルの差を、プロンプトとコードでどこまで埋められるのか。埋められないのは、どのような判断なのか。次は、実際のSkillを使って確かめてみたい。</p>
+      </section>
+      <section id="notes" aria-labelledby="notes-title"><h2 id="notes-title">留意事項</h2>
+      <ul><li>応答が以前と違うという体感や個別事例だけでは、AIサービス全体の能力低下を判断できない。</li><li>ここで述べた業務への適用案は、参考資料を手がかりにした筆者の着想であり、研究によって直接実証された構成ではない。</li><li>軽量モデルの性能は、対象業務、プロンプト、入力の長さ、利用できるツール、出力形式によって変わる。</li><li>軽量モデルは、根拠が競合する判断、暗黙の文脈理解、未知の例外処理などでは、高性能モデルより不利になる可能性がある。</li><li>コードによる検査にも欠陥は起こり得る。Skill、コード、モデルを一体として評価する必要がある。</li><li>参照した研究にはプレプリントや立場を提示する論文が含まれ、今後の査読や追試によって評価が変わる可能性がある。</li></ul>
+      </section>
+      <section id="references" class="references" aria-labelledby="references-title"><h2 id="references-title">参考資料</h2>
+      <ul><li>Peter Belcakほか「<a href="https://arxiv.org/abs/2506.02153">Small Language Models are the Future of Agentic AI</a>」（2025年6月2日）</li><li>Junjia Qiほか「<a href="https://arxiv.org/abs/2606.15874">LLM-as-Code: Agentic Programming for Agent Harness</a>」（2026年6月14日）</li><li>Libin Qiuほか「<a href="https://arxiv.org/abs/2508.02721">Blueprint First, Model Second: A Framework for Deterministic LLM Workflow</a>」（2025年8月1日）</li><li>「<a href="https://arxiv.org/abs/2607.24801">Influence of Prompt Engineering on Small Language Models for Guarded Query Routing</a>」（2026年7月）</li><li>Rudrendu Kumar Paul・Sourav Nandy「<a href="https://arxiv.org/abs/2609.22951">AgentRouter: Heterogeneous Model Routing for Cost-Optimal Multi-Step Agentic Workflows</a>」（2026年9月19日）</li><li>Lingjiao Chen、Matei Zaharia、James Zou「<a href="https://arxiv.org/abs/2307.09009">How is ChatGPT&#x27;s behavior changing over time?</a>」（2023年7月）</li><li>Agent Skills「<a href="https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx">Specification</a>」</li></ul>
+      <p class="source-note">※2026年10月13日時点で確認した情報に基づく。</p>
+      </section>
+    </article>
+  </div></main>
+  <footer class="site-footer"><p><a href="../../">DXコラム</a></p><p>着想</p></footer>
+</body>
+</html>

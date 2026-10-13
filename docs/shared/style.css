@@ -218,3 +218,6 @@ code { padding: .12em .35em; background: var(--wash); font-family: ui-monospace,
   .content-grid { display: block; padding-top: 20px; }
   .article-body > section { break-inside: avoid; padding-bottom: 35px; }
 }
+
+/* A quiet secondary entrance to the exploratory note. */
+.site-footer .idea-link { color: inherit; }
