@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Gemの指示と参考資料をGeminiのスキルへ。Word・Excelの変換、SKILL.mdと資料のまとめ方、置き換え、試運転までを４工程で解説します。">
+<title>資料も一緒に、スキルへ｜個人的DXのススメ</title>
+<link rel="canonical" href="https://k2r2f.github.io/kikanshi-editor-club/personal-dx/skill-reference-migration/">
+<meta property="og:title" content="資料も一緒に、スキルへ｜個人的DXのススメ">
+<meta property="og:description" content="Gemからスキルへ、指示と参考資料を引き継ぐ４工程。変換・フォルダー構成・更新・試運転の実践ガイド。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://k2r2f.github.io/kikanshi-editor-club/personal-dx/skill-reference-migration/">
+<link rel="stylesheet" href="../../shared/style.css">
+<link rel="stylesheet" href="./page.css">
+<script src="./page.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#article">本文へ</a>
+<header class="site-header"><a class="brand" href="../../">機関紙編集者クラブ</a><span class="series-name">個人的DXのススメ</span></header>
+<main id="article">
+<header class="reference-hero"><div class="container narrow">
+<nav class="breadcrumbs" aria-label="パンくずリスト"><a href="../../">公開資料</a><span>/</span><a href="../">個人的DXのススメ</a></nav>
+<p class="series-label">個人的DXのススメ · 記事の補足資料</p>
+<p class="title-prefix">業務自動化の、その前に</p>
+<h1>資料も一緒に、<br>スキルへ。</h1>
+<p class="lead">Gemで使ってきた指示と参考資料を、次の仕事へ。<br>資料を整え、まとめて登録し、仕事の結果まで確かめる。</p>
+<p class="updated">公開・情報確認：<time datetime="2026-10-20">2026年10月20日</time> ／ 紙面の情報基準日：2026年10月19日</p>
+<div class="hero-links"><a href="#steps">４工程を読む <span aria-hidden="true">↓</span></a><a href="#checklist">移行チェックリストへ</a></div>
+</div></header>
+<div class="container narrow reading">
+<p class="opening">連載記事「業務自動化の、その前に　資料も一緒に、スキルへ」の実践編です。GeminiのGemを手動でスキルに作り直す場合を中心に、紙面で伝えきれなかった資料の変換・登録・更新の要点をまとめました。すでに移行したスキルの資料を更新する際にも使えます。</p>
+<aside class="takeaway"><strong>持ち運ぶ単位は「指示＋参考資料」</strong><p>手動で資料を追加・更新するときは、<code>SKILL.md</code>と必要な資料を一式にして置き換えます。登録できた後は、新しい会話で実際の依頼を試しましょう。<a class="ref" href="#source-manage">［1］</a></p></aside>
+<nav class="toc" aria-label="このページの内容"><strong>このページでできること</strong><ol>
+<li><a href="#formats">資料に合った変換形式を選ぶ</a></li><li><a href="#steps">４工程で指示と資料を引き継ぐ</a></li><li><a href="#instructions">変換後の資料名を指示に反映する</a></li><li><a href="#test">新しい会話で動作を確かめる</a></li><li><a href="#checklist">チェックリストと記録用紙を使う</a></li><li><a href="#trouble">つまずいたとき・資料を更新するとき</a></li><li><a href="#sources">公式情報と更新履歴</a></li>
+</ol></nav>
+<section id="formats"><p class="section-kicker">PREPARE</p><h2>01　資料に合った形式へ変換する</h2>
+<p>スキルへのアップロードでは、PDF・画像・テキスト・CSVなどが使えますが、<code>.doc</code>・<code>.docx</code>・<code>.xlsx</code>は対象外と案内されています。Gemで使えた資料も、そのまま登録できるとは限りません。<a class="ref" href="#source-manage">［1］</a></p>
+<div class="table-scroll" role="region" aria-label="資料別の変換方法" tabindex="0"><table><thead><tr><th scope="col">元の資料</th><th scope="col">形式を選ぶ目安</th><th scope="col">変換後に見るところ</th></tr></thead><tbody>
+<tr><th scope="row">Wordの手引き・見本</th><td>図表や配置も伝えるならPDF。文章中心ならTXT・Markdownも選択肢。</td><td>見出し・注記・表の欠落、文字の読みやすさ。画像だけのPDFになっていないか。</td></tr>
+<tr><th scope="row">Excelの一覧・集計表</th><td>見た目と集計結果を示すならPDF。行と列のデータを渡すならCSV。</td><td>PDFの印刷範囲、改ページ、文字切れ。CSVの列名、文字化け、先頭のゼロ。</td></tr>
+<tr><th scope="row">Notebookに登録した資料</th><td>必要な元資料を用意し、PDF・テキストなどの対応形式に整える。</td><td>必要な資料と版がそろっているか。Notebookへのリンクだけで済ませていないか。</td></tr>
+</tbody></table></div>
+<p class="source-note">この表の形式の選び方と確認項目は、本ページの実務上の提案です。PDF化しても表計算の数式・マクロは引き継げず、CSVには通常、選んだシートの値を保存します。複数シートが必要なら、それぞれを保存して資料一覧に記録します。</p>
+<aside class="note"><strong>「現在の対応」と「今後の予定」を分ける</strong><p>Googleは、Driveからのファイル追加とGemini Notebookのノートブック追加を今後提供すると案内しています。具体的な提供日は記載されていません。また、これはWord・Excel形式の直接登録を個別に約束した案内ではありません。<a class="ref" href="#source-transition">［2］</a></p><p>元資料を取り出して登録する方法では、原本の改訂は自動反映されません。更新時にはスキル側の資料も差し替えます。</p></aside>
+</section>
+<section id="steps"><p class="section-kicker">MIGRATE</p><h2>02　指示と資料を引き継ぐ４工程</h2>
+<p>以下はパソコンのGeminiウェブアプリを使う手順です。公式の移行案内では「設定」→「スキル」、作成・管理ヘルプでは「カスタマイズ」→「スキル」と入口の表記が異なります。表示されている画面から「スキル」を開いてください。<a class="ref" href="#source-transition">［2］</a><a class="ref" href="#source-manage">［1］</a></p>
+<ol class="flow" aria-label="引き継ぎの全体像"><li><span>1</span><strong>保存する</strong><small>指示と元資料</small></li><li><span>2</span><strong>手動で作る</strong><small>名前・説明・指示</small></li><li><span>3</span><strong>一式にする</strong><small>SKILL.md＋資料</small></li><li><span>4</span><strong>置き換える</strong><small>まとめて登録</small></li></ol>
+<div class="step"><span class="step-number" aria-hidden="true">1</span><div><h3>Gemの内容を保存する</h3><p>対象のGemの編集画面から、名前・説明・指示をテキストで保存します。「知識」にあるファイルを開き、ダウンロードします。Drive上の文書などは元の保存先から、必要な形式で書き出します。</p><p>元ファイルと変換後のファイルを分けて保管し、版や更新日を記録しておきます。いつもの依頼文と、うまくできた出力も一つ残すと、移行後の比較に使えます。</p></div></div>
+<div class="step"><span class="step-number" aria-hidden="true">2</span><div><h3>指示を引き継いだスキルを手動で作成する</h3><p>「スキル」の「手動で作成」を選び、保存した名前・説明・指示を転記して作成します。この段階では、参考資料の登録はまだ終わっていません。</p><p>スキル名は作成時に形式が整えられます。次の工程では、元のGemの表示名ではなく、<strong>作成されたスキル名</strong>を確認してください。</p></div></div>
+<div class="step"><span class="step-number" aria-hidden="true">3</span><div><h3>ダウンロードして、指示と資料をまとめる</h3><p>作成したスキルの「…」メニューから「ダウンロード」を選び、ZIPを展開します。取り出した<code>SKILL.md</code>と、変換済みの参考資料を、置き換えるスキルと同名のフォルダーにまとめます。</p>
+<figure class="file-tree"><figcaption>例：スキル名が <code>editor-guide</code> の場合</figcaption><pre aria-label="フォルダー構成">editor-guide/
+├── SKILL.md        ← 指示を含むファイル
+├── writing-guide.pdf
+└── terminology.csv</pre></figure>
+<p><code>SKILL.md</code>はフォルダーの直下に置きます。ZIPの展開で同名フォルダーが二重になった場合は、中身を確認してください。既存スキルを更新するときは、今後も使う資料を一緒に残します。</p></div></div>
+<div class="step"><span class="step-number" aria-hidden="true">4</span><div><h3>スキルを置き換え、保存する</h3><p>同じスキルの「…」→「スキルを置き換える」から、準備したフォルダーを選び、アップロードして保存します。管理ヘルプではZIPのアップロードも案内されています。ZIPにする場合も、メインフォルダーに<code>SKILL.md</code>がある構成を確認しましょう。</p><p>アップロードの上限は合計100 MBです。<code>SKILL.md</code>内のスキル名は小文字・ハイフン区切りとされているため、ダウンロードした名前を基準にそろえます。<a class="ref" href="#source-manage">［1］</a></p></div></div>
+<p class="source-note">４工程の基本手順はGoogleの公式移行案内［2］、アップロードと更新の要件は管理ヘルプ［1］に基づきます。保管方法と構成例は本ページで補足しました。</p>
+</section>
+<section id="instructions"><p class="section-kicker">CONNECT</p><h2>03　指示の中の資料名も直す</h2>
+<p>資料を変換しても、指示が古いファイル名を指していれば参照先が食い違います。<code>執筆手引き.docx</code>を<code>writing-guide.pdf</code>に変えたなら、指示の中の名前も合わせます。</p>
+<div class="example"><h3>指示に加える例</h3><p class="source-note">以下は本ページの記述例です。実際の資料名・用途に合わせて直してください。</p><pre>原稿の表記を整えるときは、次の参考資料を使ってください。
+・writing-guide.pdf：見出し、文体、原稿の構成
+・terminology.csv：用語と統一表記
+
+資料に根拠がない内容は補わず、「要確認」としてください。
+修正箇所と、参照した資料名・見出しまたは該当行を示してください。
+元の原稿にある日時、人数、固有名詞は、根拠なく変更しないでください。</pre></div>
+<p>資料の役割を一行ずつ添えると、何をどの資料で判断するのかを確認しやすくなります。回答に書かれた参照箇所も、実際の資料と照合します。</p>
+</section>
+<section id="test"><p class="section-kicker">VERIFY</p><h2>04　新しい会話で、普段の仕事を試す</h2>
+<p>保存後は新しい会話を開き、<code>/</code>（更新後の画面では<code>@</code>）から対象スキルを選びます。スキルの自動選択だけに任せず、まず指定して試します。<a class="ref" href="#source-manage">［1］</a> 元のGemで使った依頼文と入力を使い、次の３点を見比べましょう。</p>
+<div class="verify-grid"><div><span>資料</span><h3>必要な根拠を拾えるか</h3><p>特定の用語や規則を使わせ、参照先が実在するか確かめる。</p></div><div><span>形式</span><h3>欲しい形で出るか</h3><p>見出し・項目順・文字数など、普段の成果物と比べる。</p></div><div><span>限界</span><h3>不明を不明と言えるか</h3><p>資料にない条件も尋ね、推測で埋めていないか確かめる。</p></div></div>
+<div class="example"><div class="example-bar"><h3>試運転の依頼文</h3><button type="button" data-copy="test-prompt" hidden>依頼文をコピー</button></div><pre id="test-prompt">このスキルの参考資料を使って、次の原稿を点検してください。
+1. 表記の修正案と、参照した資料名・該当箇所を示す。
+2. 「見出し案／修正案／要確認」の順で出力する。
+3. 資料にないことは推測せず、「要確認」に分ける。
+4. 日時・人数・固有名詞は、根拠なく変更しない。
+
+【原稿】
+ここに、移行前にも使った確認用原稿を貼り付ける。</pre></div>
+<p id="copy-status" class="status" role="status" aria-live="polite"></p>
+<p>修正したら、また新しい会話で同じ依頼を試します。資料に書かれた事実・数値・根拠を確認した上で、以前の出力にどこまで近づいたかを判断します。上記の試し方と依頼文は、本ページの実践例です。</p>
+</section>
+<section id="checklist"><p class="section-kicker">WORKSHEET</p><h2>05　移行チェックリスト</h2>
+<p>作業の抜けを確認するためのメモです。チェック状態はこのページを開いている間だけ使えます。記録を残す場合は、用紙をダウンロードするか、チェック後に印刷してください。</p>
+<div class="checklist-panel"><p id="check-progress" class="check-progress" role="status" aria-live="polite">確認済み 0 / 8</p><fieldset><legend>移行・更新の確認項目</legend>
+<label><input type="checkbox">名前・説明・指示と、元の参考資料を保存した</label>
+<label><input type="checkbox">必要な資料を対応形式に変換した</label>
+<label><input type="checkbox">PDFのページ・文字・表、CSVの列と値を確認した</label>
+<label><input type="checkbox">スキルと同名のフォルダー直下にSKILL.mdを入れた</label>
+<label><input type="checkbox">引き続き使う資料を全部そろえ、指示の資料名も直した</label>
+<label><input type="checkbox">一式を「スキルを置き換える」で登録・保存した</label>
+<label><input type="checkbox">新しい会話でスキルを指定し、資料・形式・不明点を試した</label>
+<label><input type="checkbox">資料の版、登録日、確認結果を記録した</label>
+</fieldset><div class="worksheet-actions"><a href="./assets/migration-worksheet.txt" download>記録用紙を保存（TXT）</a><button type="button" id="print-page" hidden>ページを印刷</button></div></div>
+<noscript><p class="source-note">JavaScriptが無効でも確認項目と記録用紙を使えます。進捗表示・コピー・印刷ボタンは、JavaScriptが有効な場合に使えます。</p></noscript>
+</section>
+<section id="trouble"><p class="section-kicker">MAINTAIN</p><h2>06　つまずいたとき・更新するとき</h2>
+<details><summary>アップロードできない</summary><div><p>まず<code>SKILL.md</code>の場所、フォルダーとスキルの名前、非対応形式の混入、合計100 MBの上限を確認します。不要な隠しファイルも取り除きます。<a class="ref" href="#source-manage">［1］</a></p></div></details>
+<details><summary>資料を使っていないように見える</summary><div><p>新しい会話でスキルを明示し、資料内の特定の項目を質問します。資料名・参照箇所を答えさせ、原本と照合します。ファイル名の不一致、スキャンの文字、表の欠落も見直してください。</p></div></details>
+<details><summary>資料を改訂した</summary><div><p>手元の元資料を更新し、必要なら再変換します。使い続ける資料と<code>SKILL.md</code>をそろえて、スキル全体を再アップロードします。変更した資料だけの登録で済ませず、登録後に新しい会話で改訂箇所を試しましょう。<a class="ref" href="#source-manage">［1］</a></p></div></details>
+<details><summary>自動移行を待つ場合も、何かする必要がある？</summary><div><p>GoogleはGemsと対応する添付ファイルの自動移行を案内していますが、すべての形式・機能を同じまま使えるという意味ではありません。元の指示と資料を残し、移行後に普段の依頼を試す準備をしておきます。<a class="ref" href="#source-transition">［2］</a></p></div></details>
+<details><summary>スキルに移せば、Gemの機能も全部使える？</summary><div><p>CanvasやDeep Researchなどは、現時点ではスキルに対応していないと案内されています。参考資料を移す作業と、以前の機能を再現できるかの確認は分けて行います。<a class="ref" href="#source-transition">［2］</a></p></div></details>
+<p class="related">前回の補足記事：<a href="../custom-bot-migration/">カスタムボットの引っ越し準備</a><br>Gems・GPTsの移行の全体像、保存するもの、移行後の調整をまとめています。</p>
+</section>
+<section id="sources" class="references"><h2>公式情報と更新履歴</h2><p>仕様の確認日：2026年10月20日。画面や提供範囲は更新されます。実際の作業時にも公式ヘルプと利用中のアカウントの表示を確かめてください。</p>
+<ol class="sources"><li id="source-manage"><a href="https://support.google.com/gemini/answer/17094296?hl=ja&amp;co=GENIE.Platform%3DDesktop">Google「Gemini アプリ向けのスキルを作成して管理する」</a><small>対応形式、構成と命名、容量、ダウンロード、置き換え、資料を含む更新方法。日本語版と英語版を確認。</small></li>
+<li id="source-transition"><a href="https://support.google.com/gemini/answer/18560919?hl=en">Google「About the transition from Gems to skills」</a><small>Gemの手動移行、資料の保存と一括登録、自動移行の範囲、非対応機能、Notebook等の提供予定。</small></li></ol>
+<p class="source-note">公式仕様と操作の根拠は上記の資料です。形式の選び方、構成例、依頼文、チェックリストは、連載記事とこれまでの検討を踏まえて本ページで補足した実践例です。</p>
+<p class="history-line"><time datetime="2026-10-20">2026年10月20日</time> 初版公開。紙面の４工程をもとに、形式変換・指示の参照先・試運転・資料更新の確認方法を追加。</p>
+</section>
+<nav class="back-link" aria-label="関連ページ"><a href="../">個人的DXのススメの一覧へ</a><a href="#article">ページの先頭へ ↑</a></nav>
+</div>
+</main>
+<footer class="site-footer"><p><a href="../../">機関紙編集者クラブ 公開資料</a></p><p>個人的DXのススメ</p></footer>
+</body>
+</html>
